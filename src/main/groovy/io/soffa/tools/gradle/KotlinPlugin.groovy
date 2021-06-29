@@ -12,7 +12,7 @@ class KotlinPlugin extends Java8Plugin {
         project.plugins.apply("org.jetbrains.kotlin.plugin.spring")
 
         project.dependencies {
-            implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32"
+            implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20"
         }
         project.compileKotlin {
             kotlinOptions {
