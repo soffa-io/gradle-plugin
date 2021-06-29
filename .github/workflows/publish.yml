@@ -19,7 +19,6 @@ jobs:
           SONATYPE_GPG: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
-          cat $HOME/.sonatype-keys.gpg
           gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
             -PossrhUsername=$SONATYPE_USERNAME \
             -PossrhPassword=$SONATYPE_PASSWORD \
