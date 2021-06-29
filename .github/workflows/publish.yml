@@ -16,9 +16,14 @@ jobs:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
           SIGNING_PASSWORD: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
-          GPG_SIGNING_KEY: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
+          $SONATYPE_GPG: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
           SIGNING_SECRET_FILE: /tmp/gpg.secret
         run: |
-          echo -n "$GPG_SIGNING_KEY" | base64 --decode > /tmp/gpg.secret
-          gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository -PossrhUsername="$OSSRH_USERNAME" -PossrhPassword="$OSSRH_PASSWORD" -Psigning.keyId="$SIGNING_KEYID" -Psigning.password="$SIGNING_PASSWORD" -Psigning.secretKeyRingFile="/tmp/gpg.secret"
+          echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
+          gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
+            -PossrhUsername=$OSSRH_USERNAME \
+            -PossrhPassword=$OSSRH_PASSWORD \
+            -Psigning.keyId=$SIGNING_KEYID  \
+            -Psigning.password=$SIGNING_PASSWORD \
+            -Psigning.secretKeyRingFile=$HOME/.sonatype-keys.gpg
 
