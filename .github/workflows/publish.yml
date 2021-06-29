@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  release:
+  publish-to-sonatype:
     runs-on: ubuntu-latest
     container: gradle:latest
     steps:
@@ -22,7 +22,10 @@ jobs:
           SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
           SIGNING_PASSWORD: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
           GPG_SIGNING_KEY: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
+          SIGNING_SECRET_FILE: /tmp/gpg.secret
         run: |
+          echo -n "$GPG_SIGNING_KEY" | base64 --decode > /tmp/gpg.secret
+          cat /tmp/gpg.secret
           gradle publish -PmvnUsername=$MVN_USER -PmvnPassword=$MVN_PASSWORD -Prelease=true
           gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository
 

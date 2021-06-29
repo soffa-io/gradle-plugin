@@ -66,7 +66,7 @@ ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
 ext["sonatypeStagingProfileId"] = ""
 ext["signing.keyId"] = System.getenv("SIGNING_KEYID")
 ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
-// ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
+ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_FILE")
 
 nexusPublishing {
     repositories {
