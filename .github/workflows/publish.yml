@@ -10,11 +10,6 @@ jobs:
     container: gradle:latest
     steps:
       - uses: actions/checkout@v2
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v1
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
-          PASSPHRASE: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
       - name: Publish to sonatype
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
