@@ -61,12 +61,13 @@ publishing {
     }
 }
 
-ext["ossrhUsername"] = System.getenv("OSSRH_USERNAME")
-ext["ossrhPassword"] = System.getenv("OSSRH_PASSWORD")
+ext["ossrhUsername"] = property("ossrhUsername")
+ext["ossrhPassword"] = property("ossrhPassword")
 ext["sonatypeStagingProfileId"] = ""
-ext["signing.keyId"] = System.getenv("SIGNING_KEYID")
-ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
-ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_FILE")
+ext["signing.keyId"] = property("signing.keyId")
+ext["signing.password"] = property("signing.password")
+ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
+
 
 nexusPublishing {
     repositories {
