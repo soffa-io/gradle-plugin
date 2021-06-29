@@ -20,6 +20,7 @@ jobs:
           SIGNING_SECRET_FILE: /tmp/gpg.secret
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
+          cat $HOME/.sonatype-keys.gpg
           gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
             -PossrhUsername=$OSSRH_USERNAME \
             -PossrhPassword=$OSSRH_PASSWORD \
