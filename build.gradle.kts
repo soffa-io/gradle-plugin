@@ -20,8 +20,8 @@ dependencies {
     compileOnly(gradleApi())
     implementation("org.jacoco:org.jacoco.core:0.8.7")
     implementation("org.jacoco:org.jacoco.report:0.8.7")
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.5.1")
-    api("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.2.0")
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.5.2")
+    implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
     implementation("org.jetbrains.kotlin:kotlin-allopen:1.5.20")
 }

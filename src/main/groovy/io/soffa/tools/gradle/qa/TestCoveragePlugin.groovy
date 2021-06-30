@@ -115,11 +115,6 @@ abstract class AbstractCoveragePlugin implements Plugin<Project> {
         project.check {
             dependsOn("jacocoTestCoverageVerification")
         }
-
-        /*
-        project.jacocoTestReport {
-            dependsOn("check")
-        }*/
     }
 }
 

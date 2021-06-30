@@ -1,4 +1,4 @@
-## foundation/gradle-plugin
+## soffa/gradle-plugin
 
 ## Comment activer ce plugin ?
 

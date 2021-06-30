@@ -18,7 +18,7 @@ class PmdPlugin implements Plugin<Project> {
             configFile.getParentFile().mkdirs()
         }
         if (!configFile.exists() || (System.currentTimeMillis() - configFile.lastModified() > 1000 * 60)) {
-            println(color("[Foundation]", GREEN) + " Updating local PMD rules")
+            println(color("[soffa]", GREEN) + " Updating local PMD rules")
             configFile.write('''<?xml version="1.0"?>
 <ruleset name="SGABS"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"

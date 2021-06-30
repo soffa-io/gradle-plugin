@@ -8,17 +8,17 @@ class LibraryPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.subprojects { it ->
-            it.plugins.apply("foundation.kotlin")
-            it.plugins.apply("foundation.lombok")
-            it.plugins.apply("foundation.test.junit5")
-            it.plugins.apply("foundation.maven-publish")
-            it.plugins.apply("foundation.qa.coverage")
-            // it.plugins.apply("foundation.qa.pmd")
-            it.plugins.apply("foundation.default-repositories")
+            it.plugins.apply("soffa.kotlin")
+            it.plugins.apply("soffa.lombok")
+            it.plugins.apply("soffa.test.junit5")
+            it.plugins.apply("soffa.maven-publish")
+            it.plugins.apply("soffa.qa.coverage")
+            // it.plugins.apply("soffa.qa.pmd")
+            // it.plugins.apply("soffa.default-repositories")
         }
 
-        project.plugins.apply("foundation.default-repositories")
-        //project.plugins.apply("foundation.qa.coverage-root")
+        // project.plugins.apply("soffa.default-repositories")
+        //project.plugins.apply("soffa.qa.coverage-root")
 
     }
 

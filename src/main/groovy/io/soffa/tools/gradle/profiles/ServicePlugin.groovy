@@ -13,19 +13,19 @@ class ServicePlugin implements Plugin<Project> {
             project.subprojects { Project it ->
                 interalApply(it)
             }
-            project.plugins.apply("foundation.default-repositories")
+            // project.plugins.apply("soffa.default-repositories")
         }
-        project.plugins.apply("foundation.qa.coverage-root")
+        // project.plugins.apply("soffa.qa.coverage-root")
 
     }
 
     private static void interalApply(Project project) {
-        project.plugins.apply("foundation.kotlin")
-        project.plugins.apply("foundation.lombok")
-        project.plugins.apply("foundation.test.junit5")
-        project.plugins.apply("foundation.qa.coverage")
-        // it.plugins.apply("foundation.qa.pmd")
-        project.plugins.apply("foundation.default-repositories")
+        project.plugins.apply("soffa.kotlin")
+        project.plugins.apply("soffa.lombok")
+        project.plugins.apply("soffa.test.junit5")
+        project.plugins.apply("soffa.qa.coverage")
+        // it.plugins.apply("soffa.qa.pmd")
+        // project.plugins.apply("soffa.default-repositories")
     }
 
 }

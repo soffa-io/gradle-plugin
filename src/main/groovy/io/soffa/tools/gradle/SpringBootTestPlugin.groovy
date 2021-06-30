@@ -8,7 +8,7 @@ class SpringBootTestPlugin extends SpringBootPlatformTestPlugin {
     @Override
     void apply(Project project) {
         Object.apply(project)
-        project.plugins.apply("foundation.test.karate")
+        project.plugins.apply("soffa.test.karate")
         project.dependencies {
             testImplementation("org.springframework.boot:spring-boot-starter-web")
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
