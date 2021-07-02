@@ -1,27 +1,23 @@
-package io.soffa.tools.gradle
+package io.soffa.tools.gradle.springboot
 
 
 import org.gradle.api.Project
 
-class SpringBootPlugin extends SpringBootPlatformPlugin {
+class SpringBootPlugin extends SpringBootConfigPlugin {
 
     @Override
     void apply(Project project) {
-        Object.apply(project);
+        super.apply(project);
 
-        /*project.processResources {
-            filesMatching('application.yml') {
-                expand(project.properties)
-            }
-        }*/
-        //if (!project.hasProperty("unb.service.embedded") && !project.hasProperty("sandbox")) {
         project.plugins.apply("org.springframework.boot")
-        project.dependencies {
+        /*project.dependencies {
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude group: "org.junit.vintage", module: "junit-vintage-engine"
                 exclude group: "com.vaadin.external.google"
             }
         }
+         */
+        project.dependencies.add("implementation", "io.soffa.platform:soffa-platform-springboot-web:${project.property("soffa-platform-springboot.version")}")
 
         project.configurations {
             [it.apiElements, it.runtimeElements].each {
@@ -30,6 +26,6 @@ class SpringBootPlugin extends SpringBootPlatformPlugin {
             }
         }
         //}
-
     }
+
 }

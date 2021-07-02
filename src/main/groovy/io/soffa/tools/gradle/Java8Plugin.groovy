@@ -1,26 +1,26 @@
 package io.soffa.tools.gradle
 
 import io.soffa.tools.gradle.qa.PmdPlugin
+import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.attributes.Usage
 
 import java.util.concurrent.TimeUnit
 
-class Java8Plugin extends PmdPlugin {
+class Java8Plugin implements Plugin<Project> {
 
     void apply(Project project) {
         project.plugins.apply('java')
-        //project.plugins.apply('checkstyle')
         project.plugins.apply('java-library')
         project.setProperty("sourceCompatibility", "1.8")
-        project.setProperty("targetCompatibility", "1.8")
+        // project.setProperty("targetCompatibility", "1.8")
 
         project.afterEvaluate {
             project.compileJava.options.encoding = 'UTF-8'
             project.compileJava.options.compilerArgs << '-parameters'
         }
 
-        project.dependencies {
+        project.dependencies{
             testImplementation("com.openpojo:openpojo:0.8.13")
         }
 
@@ -38,13 +38,10 @@ class Java8Plugin extends PmdPlugin {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
 
-
         project.configurations.all({
             resolutionStrategy.cacheChangingModulesFor(30, TimeUnit.SECONDS)
         })
 
-
-        //super.apply(project)
     }
 
 }
