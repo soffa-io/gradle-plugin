@@ -14,7 +14,9 @@ class SpringBootConfigPlugin implements Plugin<Project> {
         project.dependencies {
             implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.2')
             implementation platform('org.springframework.cloud:spring-cloud-dependencies:2020.0.3')
-            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.5.2"
+            annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:2.5.2") {
+                exclude group: 'com.vaadin.external.google', module: 'android-json'
+            }
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude group: "org.junit.vintage", module: "junit-vintage-engine"
                 exclude group: "com.vaadin.external.google"
