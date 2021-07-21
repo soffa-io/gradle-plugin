@@ -10,9 +10,8 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
 
-
         Project root = project.getRootProject();
-        if (root.plugins.hasPlugin(NEXUS_PUBLISH_PLUGIN)) {
+        if (!root.plugins.hasPlugin(NEXUS_PUBLISH_PLUGIN)) {
             root.plugins.apply(NEXUS_PUBLISH_PLUGIN)
 
             root.nexusPublishing {
