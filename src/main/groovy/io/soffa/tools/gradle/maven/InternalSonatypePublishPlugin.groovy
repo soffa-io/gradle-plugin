@@ -38,7 +38,7 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
 
 
                     pom {
-                        name.set(project.displayName)
+                        name.set(project.displayName ?: project.name)
                         description.set(project.description)
                         url.set(project.property("url"))
                         licenses {
