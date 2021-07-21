@@ -10,6 +10,9 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
             mavenLocal()
             mavenCentral()
             maven {
+                url = "https://oss.sonatype.org/content/groups/staging/"
+            }
+            maven {
                 url = "https://oss.sonatype.org/content/repositories/snapshots/"
             }
             maven {
