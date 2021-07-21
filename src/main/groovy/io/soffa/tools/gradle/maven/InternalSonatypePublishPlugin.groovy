@@ -36,7 +36,6 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
                     groupId = project.property("group")
                     artifactId = project.name
 
-
                     pom {
                         name.set(project.displayName ?: project.name)
                         description.set(project.description)
