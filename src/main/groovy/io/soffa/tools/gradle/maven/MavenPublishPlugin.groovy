@@ -18,9 +18,9 @@ class MavenPublishPlugin implements Plugin<Project> {
         }
 
 
-        String publicationUrl = project.findProperty("publication.url") ?: System.getenv("MVN_PUBLICATION_URL")
-        String publicationUser = project.findProperty("publication.username") ?: System.getenv("MVN_PUBLICATION_USER")
-        String publicationPassword = project.findProperty("publication.password") ?: System.getenv("MVN_PUBLICATION_PASSWORD")
+        String publicationUrl = project.findProperty("publishing.url") ?: System.getenv("MVN_PUBLISHING_URL")
+        String publicationUser = project.findProperty("publishing.username") ?: System.getenv("MVN_PUBLISHING_USER")
+        String publicationPassword = project.findProperty("publishing.password") ?: System.getenv("MVN_PUBLISHING_PASSWORD")
 
         if (publicationUrl !=null && publicationUser != null && publicationPassword!=null) {
             println("Configuration maven publication: ${publicationUrl} / ${publicationUser}")
