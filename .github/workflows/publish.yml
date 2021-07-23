@@ -18,7 +18,7 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Publish package
-        run: gradle publish
+        run: gradle publish -x publishMavenPublicationToSonatypeRepository
         env:
           MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
           MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
