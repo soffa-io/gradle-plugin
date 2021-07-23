@@ -93,29 +93,31 @@ publishing {
 
     repositories {
         maven {
-            setUrl(System.getenv("MVN_PUBLISHING_URL"))
+            setUrl(System.getenv("MAVEN_PUBLISHING_URL"))
             credentials {
-                username = System.getenv("MVN_PUBLISHING_USER")
-                password = System.getenv("MVN_PUBLISHING_PASSWORD")
+                username = System.getenv("MAVEN_PUBLISHING_USER")
+                password = System.getenv("MAVEN_PUBLISHING_PASSWORD")
             }
         }
     }
 }
 
-ext["ossrhUsername"] = findProperty("ossrhUsername")
-ext["ossrhPassword"] = findProperty("ossrhPassword")
-ext["sonatypeStagingProfileId"] = ""
-ext["signing.keyId"] = findProperty("signing.keyId")
-ext["signing.password"] = findProperty("signing.password")
-ext["signing.secretKeyRingFile"] = findProperty("signing.secretKeyRingFile")
+if (hasProperty("ossrhUsername")) {
+    ext["ossrhUsername"] = property("ossrhUsername")
+    ext["ossrhPassword"] = property("ossrhPassword")
+    ext["sonatypeStagingProfileId"] = ""
+    ext["signing.keyId"] = property("signing.keyId")
+    ext["signing.password"] = property("signing.password")
+    ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
 
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
-            username.set("${findProperty("ossrhUsername")}")
-            password.set("${findProperty("ossrhPassword")}")
+    nexusPublishing {
+        repositories {
+            sonatype {
+                // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
+                username.set("${property("ossrhUsername")}")
+                password.set("${property("ossrhPassword")}")
+            }
         }
     }
 }

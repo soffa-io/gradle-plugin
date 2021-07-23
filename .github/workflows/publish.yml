@@ -4,6 +4,16 @@ on:
   push:
     branches: [ master ]
 
+env:
+  GITHUB_PKG_USER: ${{ env.GITHUB_ACTOR }}
+  GITHUB_PKG_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
+  GITHUB_PKG_REPO: https://maven.pkg.github.com/soffa-io/artifacts
+  SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+  SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+  SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
+  SIGNING_PASSWORD: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
+  SONATYPE_GPG: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
+
 jobs:
 
   publish-maven-artifact:
@@ -18,22 +28,14 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Publish artifact to Github
-        run: |
-          gradle publishGithubPublicationToMavenRepository
-        env:
-          MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
-          MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
-          MVN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
+        run: gradle publish
       - name: Publish artifact to public Sonatype Nexus
-        env:
-          SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
-          SIGNING_PASSWORD: ${{ secrets.OSSRH_SIGNING_PASSWORD }}
-          SONATYPE_GPG: ${{ secrets.SOFFA_GPG_SIGNING_KEY }}
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
           gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
-            -PossrhUsername=$SONATYPE_USERNAME -PossrhPassword=$SONATYPE_PASSWORD \
-            -Psigning.keyId=$SIGNING_KEYID  -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$HOME/.sonatype-keys.gpg
+            -PossrhUsername=$SONATYPE_USERNAME \
+            -PossrhPassword=$SONATYPE_PASSWORD \
+            -Psigning.keyId=$SIGNING_KEYID  \
+            -Psigning.password=$SIGNING_PASSWORD \
+            -Psigning.secretKeyRingFile=$HOME/.sonatype-keys.gpg
 
