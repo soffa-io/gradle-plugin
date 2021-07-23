@@ -93,7 +93,7 @@ publishing {
 
     repositories {
         maven {
-            setUrl("https://maven.pkg.github.com/soffa/artifacts")
+            setUrl(System.getenv("MVN_PUBLISHING_URL"))
             credentials {
                 username = System.getenv("MVN_PUBLISHING_USER")
                 password = System.getenv("MVN_PUBLISHING_PASSWORD")

@@ -18,11 +18,11 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Publish package
-        run: gradle publish -x publishMavenPublicationToSonatypeRepository
+        run: gradle publish
         env:
           MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
           MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
-          MVN_PUBLISHING_URL: https://maven.pkg.github.com/soffa/artifacts
+          MVN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
       - name: Publish to sonatype
         env:
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
