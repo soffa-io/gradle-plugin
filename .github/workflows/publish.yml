@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 env:
-  MAVEN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
+  MAVEN_PUBLISHING_USER: ${{ github.actor }}
   MAVEN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
   MAVEN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
   SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
