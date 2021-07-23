@@ -82,7 +82,7 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
         project.ext["signing.secretKeyRingFile"] = project.property("signing.secretKeyRingFile")
 
         project.signing {
-            sign(project.publishing.publications["maven"])
+            sign(project.publishing.publications["sonatype"] ?: project.publishing.publications["maven"])
         }
 
     }

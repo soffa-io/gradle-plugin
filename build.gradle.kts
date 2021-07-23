@@ -63,29 +63,32 @@ publishing {
                 }
             }
         }
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            pom {
-                name.set("SOFFA Gradle Plugin")
-                description.set("A gradle plugin with useful plugins.")
-                url.set("https://github.com/soffa-io/soffa-gradle-plugin")
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("startup-station")
-                        name.set("Startup Station")
-                        email.set("soffa@startupstation.co")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                    developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
+
+        if (hasProperty("ossrhUsername")) {
+            create<MavenPublication>("sonatype") {
+                from(components["java"])
+                pom {
+                    name.set("SOFFA Gradle Plugin")
+                    description.set("A gradle plugin with useful plugins.")
                     url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    licenses {
+                        license {
+                            name.set("Apache License 2.0")
+                            url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("startup-station")
+                            name.set("Startup Station")
+                            email.set("soffa@startupstation.co")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
+                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    }
                 }
             }
         }
@@ -122,6 +125,6 @@ if (hasProperty("ossrhUsername")) {
     }
 
     signing {
-        sign(publishing.publications["maven"])
+        sign(publishing.publications["sonatype"])
     }
 }
