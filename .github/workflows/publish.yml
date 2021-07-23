@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  release-to-github:
+  publish-maven-artifact:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,12 +23,6 @@ jobs:
           MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
           MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
           MVN_PUBLISHING_URL: https://maven.pkg.github.com/soffa/artifacts
-
-  release-to-sonatype:
-    runs-on: ubuntu-latest
-    container: gradle:latest
-    steps:
-      - uses: actions/checkout@v2
       - name: Publish to sonatype
         env:
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}

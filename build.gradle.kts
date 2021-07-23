@@ -102,20 +102,20 @@ publishing {
     }
 }
 
-ext["ossrhUsername"] = property("ossrhUsername")
-ext["ossrhPassword"] = property("ossrhPassword")
+ext["ossrhUsername"] = findProperty("ossrhUsername")
+ext["ossrhPassword"] = findProperty("ossrhPassword")
 ext["sonatypeStagingProfileId"] = ""
-ext["signing.keyId"] = property("signing.keyId")
-ext["signing.password"] = property("signing.password")
-ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
+ext["signing.keyId"] = findProperty("signing.keyId")
+ext["signing.password"] = findProperty("signing.password")
+ext["signing.secretKeyRingFile"] = findProperty("signing.secretKeyRingFile")
 
 
 nexusPublishing {
     repositories {
         sonatype {
             // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
-            username.set("${property("ossrhUsername")}")
-            password.set("${property("ossrhPassword")}")
+            username.set("${findProperty("ossrhUsername")}")
+            password.set("${findProperty("ossrhPassword")}")
         }
     }
 }
