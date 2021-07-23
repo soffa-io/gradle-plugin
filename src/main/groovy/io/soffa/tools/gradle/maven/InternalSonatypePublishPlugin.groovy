@@ -11,6 +11,12 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         Project root = project.getRootProject();
+
+        if (!root.hasProperty("skipSonatypeRelease")) {
+            println("[INFO] Skipping sonatype release")
+            return
+        }
+
         if (!root.plugins.hasPlugin(NEXUS_PUBLISH_PLUGIN)) {
             root.plugins.apply(NEXUS_PUBLISH_PLUGIN)
 

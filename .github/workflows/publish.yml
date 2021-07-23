@@ -17,13 +17,14 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-      - name: Publish package
-        run: gradle publish
+      - name: Publish artifact to Github
+        run: |
+          gradle publish -x publishMavenPublicationToSonatypeRepository
         env:
           MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
           MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
           MVN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
-      - name: Publish to sonatype
+      - name: Publish artifact to public Sonatype Nexus
         env:
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -33,9 +34,6 @@ jobs:
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
           gradle sign publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
-            -PossrhUsername=$SONATYPE_USERNAME \
-            -PossrhPassword=$SONATYPE_PASSWORD \
-            -Psigning.keyId=$SIGNING_KEYID  \
-            -Psigning.password=$SIGNING_PASSWORD \
-            -Psigning.secretKeyRingFile=$HOME/.sonatype-keys.gpg
+            -PossrhUsername=$SONATYPE_USERNAME -PossrhPassword=$SONATYPE_PASSWORD \
+            -Psigning.keyId=$SIGNING_KEYID  -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$HOME/.sonatype-keys.gpg
 
