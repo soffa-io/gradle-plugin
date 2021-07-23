@@ -20,6 +20,10 @@ class KotlinPlugin extends Java8Plugin {
             }
         }
 
+        project.javadoc {
+            exclude "**/springframework/**"
+        }
+
         project.compileTestKotlin {
             kotlinOptions {
                 freeCompilerArgs = ["-Xjsr305=strict"]

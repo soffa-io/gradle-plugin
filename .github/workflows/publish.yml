@@ -43,7 +43,6 @@ jobs:
   publish-to-sonatype:
     needs: check
     runs-on: ubuntu-latest
-    if: ${{ 1 == 0 }}
     permissions:
       contents: read
       packages: write

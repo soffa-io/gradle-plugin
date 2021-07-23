@@ -17,7 +17,6 @@ class SpringBootPlugin extends SpringBootConfigPlugin {
             }
         }
          */
-        project.dependencies.add("implementation", "io.soffa.platform:soffa-platform-springboot-web:${project.property("soffa-platform-springboot.version")}")
 
         project.configurations {
             [it.apiElements, it.runtimeElements].each {
