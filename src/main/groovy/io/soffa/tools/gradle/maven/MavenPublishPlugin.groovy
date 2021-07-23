@@ -7,6 +7,10 @@ import org.gradle.api.publish.maven.MavenPublication
 class MavenPublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
+
+        if (project.rootProject.hasProperty("ossrhUsername")) {
+            return
+        }
         project.plugins.apply('maven-publish')
 
         project.publishing.publications {

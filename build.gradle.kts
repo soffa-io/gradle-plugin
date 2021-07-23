@@ -39,6 +39,13 @@ repositories {
 
 if (hasProperty("ossrhUsername")) {
 
+    ext["ossrhUsername"] = property("ossrhUsername")
+    ext["ossrhPassword"] = property("ossrhPassword")
+    ext["sonatypeStagingProfileId"] = ""
+    ext["signing.keyId"] = property("signing.keyId")
+    ext["signing.password"] = property("signing.password")
+    ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
+
     publishing {
         publications {
             create<MavenPublication>("maven") {
@@ -70,13 +77,6 @@ if (hasProperty("ossrhUsername")) {
         }
     }
 
-    ext["ossrhUsername"] = property("ossrhUsername")
-    ext["ossrhPassword"] = property("ossrhPassword")
-    ext["sonatypeStagingProfileId"] = ""
-    ext["signing.keyId"] = property("signing.keyId")
-    ext["signing.password"] = property("signing.password")
-    ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
-
     nexusPublishing {
         repositories {
             sonatype {
@@ -88,10 +88,11 @@ if (hasProperty("ossrhUsername")) {
     }
 
     signing {
-        sign(publishing.publications["sonatype"])
+        sign(publishing.publications["maven"])
     }
 
 } else {
+
     publishing {
         publications {
             create<MavenPublication>("maven") {
