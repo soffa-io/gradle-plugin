@@ -19,7 +19,7 @@ jobs:
           distribution: 'adopt'
       - name: Publish artifact to Github
         run: |
-          gradle publish -x publishMavenPublicationToSonatypeRepository
+          gradle publishGithubPublicationToMavenRepository
         env:
           MVN_PUBLISHING_USER: ${{ env.GITHUB_ACTOR }}
           MVN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
