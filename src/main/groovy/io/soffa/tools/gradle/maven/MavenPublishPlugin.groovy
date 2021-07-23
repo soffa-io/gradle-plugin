@@ -11,10 +11,11 @@ class MavenPublishPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.plugins.apply('maven-publish')
-        project.plugins.apply('signing')
+
 
         if (project.findProperty("sonatype")) {
 
+            project.plugins.apply('signing')
             Project root = project.getRootProject()
 
             if (!root.plugins.hasPlugin(NEXUS_PUBLISH_PLUGIN)) {
@@ -70,10 +71,7 @@ class MavenPublishPlugin implements Plugin<Project> {
             project.ext["signing.password"] = project.property("signing.password")
             project.ext["signing.secretKeyRingFile"] = project.property("signing.secretKeyRingFile")
 
-
-
-
-        }else {
+        } else {
             project.publishing.publications {
                 maven(MavenPublication) {
                     from project.components.java
@@ -98,12 +96,16 @@ class MavenPublishPlugin implements Plugin<Project> {
             }
         }
 
-        project.signing {
-            sign(project.publishing.publications["maven"])
-        }
+
         project.java {
             withJavadocJar()
             withSourcesJar()
+        }
+
+        if (project.plugins.hasPlugin("signing")) {
+            project.signing {
+                sign(project.publishing.publications["maven"])
+            }
         }
     }
 
