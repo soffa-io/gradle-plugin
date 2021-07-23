@@ -35,37 +35,13 @@ repositories {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("github") {
-            from(components["java"])
-            pom {
-                name.set("SOFFA Gradle Plugin")
-                description.set("A gradle plugin with useful plugins.")
-                url.set("https://github.com/soffa-io/soffa-gradle-plugin")
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("startup-station")
-                        name.set("Startup Station")
-                        email.set("soffa@startupstation.co")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                    developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
-                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
-                }
-            }
-        }
 
-        if (hasProperty("ossrhUsername")) {
-            create<MavenPublication>("sonatype") {
+
+if (hasProperty("ossrhUsername")) {
+
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
                 from(components["java"])
                 pom {
                     name.set("SOFFA Gradle Plugin")
@@ -94,25 +70,12 @@ publishing {
         }
     }
 
-    repositories {
-        maven {
-            setUrl(System.getenv("MAVEN_PUBLISHING_URL"))
-            credentials {
-                username = System.getenv("MAVEN_PUBLISHING_USER")
-                password = System.getenv("MAVEN_PUBLISHING_PASSWORD")
-            }
-        }
-    }
-}
-
-if (hasProperty("ossrhUsername")) {
     ext["ossrhUsername"] = property("ossrhUsername")
     ext["ossrhPassword"] = property("ossrhPassword")
     ext["sonatypeStagingProfileId"] = ""
     ext["signing.keyId"] = property("signing.keyId")
     ext["signing.password"] = property("signing.password")
     ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
-
 
     nexusPublishing {
         repositories {
@@ -126,5 +89,46 @@ if (hasProperty("ossrhUsername")) {
 
     signing {
         sign(publishing.publications["sonatype"])
+    }
+
+} else {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                from(components["java"])
+                pom {
+                    name.set("SOFFA Gradle Plugin")
+                    description.set("A gradle plugin with useful plugins.")
+                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    licenses {
+                        license {
+                            name.set("Apache License 2.0")
+                            url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("startup-station")
+                            name.set("Startup Station")
+                            email.set("soffa@startupstation.co")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
+                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                setUrl(System.getenv("MAVEN_PUBLISHING_URL"))
+                credentials {
+                    username = System.getenv("MAVEN_PUBLISHING_USER")
+                    password = System.getenv("MAVEN_PUBLISHING_PASSWORD")
+                }
+            }
+        }
     }
 }
