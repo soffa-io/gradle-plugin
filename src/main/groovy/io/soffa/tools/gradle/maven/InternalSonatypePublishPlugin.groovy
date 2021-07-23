@@ -12,8 +12,8 @@ class InternalSonatypePublishPlugin implements Plugin<Project> {
 
         Project root = project.getRootProject();
 
-        if (!root.hasProperty("skipSonatypeRelease")) {
-            println("[INFO] Skipping sonatype release")
+        if (!root.hasProperty("ossrhUsername")) {
+            println("[WARN] Skipping sonatype release because ossrhUsername is missing")
             return
         }
 
