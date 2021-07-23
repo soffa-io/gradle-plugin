@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-      - name: Publish artifact to Github
+      - name: Run checks
         run: gradle check
 
   publish-to-github:
@@ -36,7 +36,9 @@ jobs:
       packages: write
     steps:
       - name: Publish artifact to Github
-        run: gradle publish
+        run: |
+          ls -alr
+          gradle publish
 
   publish-to-sonatype:
     needs: check
