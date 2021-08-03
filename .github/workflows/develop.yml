@@ -16,7 +16,7 @@ env:
 
 jobs:
 
-  check:
+  check-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,8 +32,11 @@ jobs:
           echo ${{ github.ref }}
           gradle check
       - name: Publish artifact to Github
-        if: ${{ github.ref == 'develp' }}
+        if: ${{ github.ref == 'refs/heads/develop' }}
         run: gradle publish -x test -Dsnapshot=true
+      - name: Publish artifact to Github
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: gradle publish -x test -Drelease=true
 
 
 
