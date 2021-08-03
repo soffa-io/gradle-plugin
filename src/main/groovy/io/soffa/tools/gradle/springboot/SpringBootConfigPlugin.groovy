@@ -21,6 +21,9 @@ class SpringBootConfigPlugin implements Plugin<Project> {
                 exclude group: "org.junit.vintage", module: "junit-vintage-engine"
                 exclude group: "com.vaadin.external.google"
             }
+            if (project.plugins.hasPlugin("kotlin")) {
+                kapt("org.springframework.boot:spring-boot-configuration-processor:2.5.2")
+            }
         }
 
 

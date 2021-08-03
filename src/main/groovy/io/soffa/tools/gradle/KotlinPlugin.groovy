@@ -9,6 +9,7 @@ class KotlinPlugin extends Java8Plugin {
     void apply(Project project) {
         super.apply(project)
         project.plugins.apply("kotlin") //
+        project.plugins.apply("kotlin-kapt") //
 
         project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-reflect:1.5.10")
         project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
