@@ -14,6 +14,13 @@ class MavenPublishPlugin implements Plugin<Project> {
 
         String projectVersion = project.version
 
+        if (project.hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
+            projectVersion += "-SNAPSHOT"
+        } else if (project.hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
+            projectVersion = projectVersion.replace("-SNAPSHOT", "")
+        }
+
+
         if (project.findProperty("sonatype")) {
 
             project.plugins.apply('signing')

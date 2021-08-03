@@ -16,7 +16,7 @@ env:
 
 jobs:
 
-  check-publish:
+  check-and-publish-internal:
     runs-on: ubuntu-latest
     permissions:
       contents: read
