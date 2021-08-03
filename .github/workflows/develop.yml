@@ -31,7 +31,7 @@ jobs:
         run: |
           echo ${{ github.ref }}
           gradle check
-      - name: Publish artifact to Github
+      - name: Publish snapshot artifact to Github
         if: ${{ github.ref == 'refs/heads/develop' }}
         run: gradle publish -x test -Dsnapshot=true
       - name: Publish artifact to Github
