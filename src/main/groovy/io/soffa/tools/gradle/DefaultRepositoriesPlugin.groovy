@@ -21,7 +21,7 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
             if (prvMvnUrl) {
                 prvMvnUrl.split(",").each {
                     maven {
-                        url = it.trim()
+                        url = it
                         credentials {
                             username = prvMvnUser
                             password = prvMvnPwd
