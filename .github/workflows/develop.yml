@@ -18,6 +18,9 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -28,15 +31,6 @@ jobs:
         run: |
           echo ${{ github.ref }}
           gradle check
-
-  publish-to-github:
-    needs: check
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v2
       - name: Publish artifact to Github
         if: ${{ github.ref == 'develp' }}
         run: gradle publish -x test -Dsnapshot=true
