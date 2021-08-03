@@ -36,6 +36,13 @@ repositories {
 }
 
 
+var projectVersion = project.version.toString()
+
+if (hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
+    projectVersion += "-SNAPSHOT"
+} else if (hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
+    projectVersion = projectVersion.replace("-SNAPSHOT", "")
+}
 
 if (hasProperty("ossrhUsername")) {
 
@@ -54,6 +61,7 @@ if (hasProperty("ossrhUsername")) {
                     name.set("SOFFA Gradle Plugin")
                     description.set("A gradle plugin with useful plugins.")
                     url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    version = projectVersion
                     licenses {
                         license {
                             name.set("Apache License 2.0")
@@ -101,6 +109,7 @@ if (hasProperty("ossrhUsername")) {
                     name.set("SOFFA Gradle Plugin")
                     description.set("A gradle plugin with useful plugins.")
                     url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    version = projectVersion
                     licenses {
                         license {
                             name.set("Apache License 2.0")

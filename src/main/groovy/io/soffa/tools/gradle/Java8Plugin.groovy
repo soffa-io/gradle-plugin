@@ -39,8 +39,10 @@ class Java8Plugin implements Plugin<Project> {
         }
 
         project.configurations.all({
-            resolutionStrategy.cacheChangingModulesFor(30, TimeUnit.SECONDS)
+            resolutionStrategy.cacheChangingModulesFor(20, TimeUnit.SECONDS)
         })
+
+
 
     }
 

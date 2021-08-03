@@ -12,6 +12,7 @@ class MavenPublishPlugin implements Plugin<Project> {
 
         project.plugins.apply('maven-publish')
 
+        String projectVersion = project.version
 
         if (project.findProperty("sonatype")) {
 
@@ -37,6 +38,7 @@ class MavenPublishPlugin implements Plugin<Project> {
                         from project.components.java
                         groupId = project.property("group")
                         artifactId = project.name
+                        version = projectVersion
                         pom {
                             name.set(project.displayName ?: project.name)
                             description.set(project.description)
@@ -77,6 +79,7 @@ class MavenPublishPlugin implements Plugin<Project> {
                     from project.components.java
                     groupId = project.property("group")
                     artifactId = project.name
+                    version = projectVersion
                 }
             }
 
