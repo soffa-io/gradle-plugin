@@ -33,10 +33,10 @@ jobs:
           gradle check
       - name: Publish snapshot artifact to Github
         if: ${{ github.ref == 'refs/heads/develop' }}
-        run: gradle publish -x test -Dsnapshot=true
+        run: gradle publish -x test -Psnapshot=true
       - name: Publish artifact to Github
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: gradle publish -x test -Drelease=true
+        run: gradle publish -x test -Prelease=true
 
 
 

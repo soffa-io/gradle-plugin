@@ -37,7 +37,6 @@ repositories {
 
 
 var projectVersion = project.version.toString()
-
 if (hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
     projectVersion += "-SNAPSHOT"
 } else if (hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
