@@ -19,9 +19,9 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
                 setUrl("https://oss.sonatype.org/content/groups/public")
             }
             if (prvMvnUrl) {
-                prvMvnUrl.split(",").each {
+                prvMvnUrl.split(",").each {repoUrl ->
                     maven {
-                        url = it
+                        url = repoUrl
                         credentials {
                             username = prvMvnUser
                             password = prvMvnPwd
