@@ -32,6 +32,10 @@ class KotlinPlugin extends Java8Plugin {
             }
         }
 
+        project.kapt.classloaders.cache.size = 8
+        project.kapt.includeCompileClasspath = false
+        project.kapt.include.compile.classpath = false
+
     }
 
 
