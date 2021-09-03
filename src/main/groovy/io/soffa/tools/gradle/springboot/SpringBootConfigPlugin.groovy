@@ -1,9 +1,9 @@
 package io.soffa.tools.gradle.springboot
 
-import org.gradle.api.Plugin
+import io.soffa.tools.gradle.test.JUnitConfigPlugin
 import org.gradle.api.Project
 
-class SpringBootConfigPlugin implements Plugin<Project> {
+class SpringBootConfigPlugin extends JUnitConfigPlugin {
 
     @Override
     void apply(Project project) {
@@ -12,20 +12,20 @@ class SpringBootConfigPlugin implements Plugin<Project> {
         project.plugins.apply("org.jetbrains.kotlin.plugin.spring")
 
         project.dependencies {
-            implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.2')
+            implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.3')
             implementation platform('org.springframework.cloud:spring-cloud-dependencies:2020.0.3')
-            annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:2.5.2") {
-                exclude group: 'com.vaadin.external.google', module: 'android-json'
-            }
+
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude group: "org.junit.vintage", module: "junit-vintage-engine"
                 exclude group: "com.vaadin.external.google"
             }
+            annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:2.5.3") {
+                exclude group: 'com.vaadin.external.google', module: 'android-json'
+            }
             if (project.plugins.hasPlugin("kotlin")) {
-                kapt("org.springframework.boot:spring-boot-configuration-processor:2.5.2")
+                kapt("org.springframework.boot:spring-boot-configuration-processor:2.5.3")
             }
         }
-
 
         project.compileJava.inputs.files(project.processResources)
         project.configurations {
@@ -36,6 +36,7 @@ class SpringBootConfigPlugin implements Plugin<Project> {
             }
         }
 
+        super.apply(project)
     }
 
 }

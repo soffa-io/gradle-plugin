@@ -11,8 +11,8 @@ class KotlinPlugin extends Java8Plugin {
         project.plugins.apply("kotlin") //
         project.plugins.apply("kotlin-kapt") //
 
-        project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-reflect:1.5.10")
-        project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
+        project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-reflect:1.5.21")
+        project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21")
 
         project.compileKotlin {
             kotlinOptions {
@@ -32,10 +32,7 @@ class KotlinPlugin extends Java8Plugin {
             }
         }
 
-        project.kapt.classloaders.cache.size = 8
-        project.kapt.includeCompileClasspath = false
-        project.kapt.include.compile.classpath = false
-
+        //
     }
 
 

@@ -21,7 +21,7 @@ dependencies {
     implementation("org.jacoco:org.jacoco.core:0.8.7")
     implementation("org.jacoco:org.jacoco.report:0.8.7")
     implementation("io.github.gradle-nexus:publish-plugin:1.1.0")
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.5.2")
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.5.3")
     implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
     implementation("org.jetbrains.kotlin:kotlin-allopen:1.5.21")
