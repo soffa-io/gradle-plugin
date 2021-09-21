@@ -1,3 +1,1 @@
-rootProject.name = "soffa-gradle-parent"
-
-include ":soffa-gradle-java"
+rootProject.name = "soffa-gradle-plugin"

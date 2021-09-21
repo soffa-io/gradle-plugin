@@ -1,6 +1,6 @@
 package io.soffa.tools.gradle.qa
 
-
+import io.soffa.tools.gradle.Ansi
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -9,7 +9,7 @@ import static io.soffa.tools.gradle.Ansi.*
 class PmdPlugin implements Plugin<Project> {
 
     void apply(Project project) {
-        print(BOLD)
+        print(Ansi.BOLD)
 
 
         def configDir = "${project.rootDir}/config"
@@ -18,7 +18,7 @@ class PmdPlugin implements Plugin<Project> {
             configFile.getParentFile().mkdirs()
         }
         if (!configFile.exists() || (System.currentTimeMillis() - configFile.lastModified() > 1000 * 60)) {
-            println(color("[soffa]", GREEN) + " Updating local PMD rules")
+            println(color("[soffa]", Ansi.GREEN) + " Updating local PMD rules")
             configFile.write('''<?xml version="1.0"?>
 <ruleset name="SGABS"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
@@ -92,7 +92,7 @@ class PmdPlugin implements Plugin<Project> {
     </rule>
 </ruleset>''')
         }
-        print(NORMAL)
+        print(Ansi.NORMAL)
 
         if (project.subprojects.isEmpty()) {
             internalApply(project, configDir)
