@@ -37,7 +37,7 @@ class PlatformPlugin implements Plugin<Project> {
                 // project.dependencies.add("implementation", 'org.springframework.boot:spring-boot-starter-actuator')
 
                 if (features != null) {
-                    if (features.contains("data")) {
+                    if (features.contains("data") || features.contains("data-jpa")) {
                         project.dependencies.add("implementation", "org.springframework.boot:spring-boot-starter-data-jpa")
                     }
                     if (features.contains("vault")) {
