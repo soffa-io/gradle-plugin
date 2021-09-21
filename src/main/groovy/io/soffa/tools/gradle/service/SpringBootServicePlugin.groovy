@@ -10,6 +10,9 @@ class SpringBootServicePlugin extends SpringBootDependencyPlugin {
         project.dependencies.add("implementation", "org.springframework.boot:spring-boot-starter-web")
         project.dependencies.add("implementation", "org.springframework.boot:spring-boot-starter-actuator")
         project.dependencies.add("testImplementation", "org.springframework.boot:spring-boot-starter-test")
+        project.test {
+            useJUnitPlatform()
+        }
     }
 
 }
