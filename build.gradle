@@ -1,0 +1,131 @@
+plugins {
+    id "io.github.gradle-nexus.publish-plugin"  version "1.1.0"
+}
+
+subprojects {project ->
+
+    repositories {
+        mavenCentral()
+        maven {
+            setUrl("https://plugins.gradle.org/m2/")
+        }
+    }
+
+    project.plugins.apply("java-library")
+    project.plugins.apply("groovy")
+    project.plugins.apply("signing")
+    project.plugins.apply("maven-publish")
+
+    project.java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(8))
+        }
+    }
+
+    var projectVersion = project.version.toString()
+
+    if (hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
+        projectVersion += "-SNAPSHOT"
+    } else if (hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
+        projectVersion = projectVersion.replace("-SNAPSHOT", "")
+    }
+
+    if (hasProperty("ossrhUsername")) {
+
+        ext["ossrhUsername"] = property("ossrhUsername")
+        ext["ossrhPassword"] = property("ossrhPassword")
+        ext["sonatypeStagingProfileId"] = ""
+        ext["signing.keyId"] = property("signing.keyId")
+        ext["signing.password"] = property("signing.password")
+        ext["signing.secretKeyRingFile"] = property("signing.secretKeyRingFile")
+
+        project.publishing {
+            publications {
+                maven(MavenPublication) {
+                    from components.java
+                    pom {
+                        name.set("SOFFA Gradle Plugin")
+                        description.set("Gradle plugins.")
+                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        version = projectVersion
+                        licenses {
+                            license {
+                                name.set("Apache License 2.0")
+                                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                            }
+                        }
+                        developers {
+                            developer {
+                                id.set("soffa-io")
+                                name.set("SOFFA")
+                                email.set("noreply@soffa.io")
+                            }
+                        }
+                        scm {
+                            connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
+                            developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
+                            url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        }
+                    }
+                }
+            }
+        }
+
+        nexusPublishing {
+            repositories {
+                sonatype {
+                    // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
+                    username.set("${property("ossrhUsername")}")
+                    password.set("${property("ossrhPassword")}")
+                }
+            }
+        }
+
+        signing {
+            sign(publishing.publications["maven"])
+        }
+
+    } else {
+
+        project.publishing {
+            publications {
+                maven(MavenPublication) {
+                    from project.components.java
+                    pom {
+                        name.set("SOFFA Gradle Plugin")
+                        description.set("A gradle plugin with useful plugins.")
+                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        version = projectVersion
+                        licenses {
+                            license {
+                                name.set("Apache License 2.0")
+                                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                            }
+                        }
+                        developers {
+                            developer {
+                                id.set("soffa-io")
+                                name.set("SOFFA")
+                                email.set("noreply@soffa.io")
+                            }
+                        }
+                        scm {
+                            connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
+                            developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
+                            url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        }
+                    }
+                }
+            }
+            repositories {
+                maven {
+                    setUrl(System.getenv("MAVEN_PUBLISHING_URL"))
+                    credentials {
+                        username = System.getenv("MAVEN_PUBLISHING_USER")
+                        password = System.getenv("MAVEN_PUBLISHING_PASSWORD")
+                    }
+                }
+            }
+        }
+    }
+}
