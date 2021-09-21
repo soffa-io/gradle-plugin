@@ -1,5 +1,6 @@
 plugins {
     id "io.github.gradle-nexus.publish-plugin"  version "1.1.0"
+    id "signing"
 }
 
 subprojects {project ->
@@ -13,7 +14,7 @@ subprojects {project ->
 
     project.plugins.apply("java-library")
     project.plugins.apply("groovy")
-    project.plugins.apply("signing")
+    // project.plugins.apply("signing")
     project.plugins.apply("maven-publish")
 
     project.java {
