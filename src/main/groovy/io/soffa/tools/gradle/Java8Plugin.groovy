@@ -15,7 +15,9 @@ class Java8Plugin implements Plugin<Project> {
         project.setProperty("sourceCompatibility", "1.8")
         LombokPlugin.applyPlugin(project)
         // project.setProperty("targetCompatibility", "1.8")
-        new PmdPlugin().apply(project)
+        if (project.findProperty("soffa.pmd.disabled") != true) {
+            new PmdPlugin().apply(project)
+        }
 
         project.afterEvaluate {
             project.compileJava.options.encoding = 'UTF-8'
