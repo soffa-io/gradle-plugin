@@ -1,5 +1,4 @@
 .gradle
-/com.socgen.unibank.core.commons.build/
 !gradle/wrapper/gradle-wrapper.jar
 logs
 
@@ -28,7 +27,6 @@ logs
 out
 tmp
 output
-com.socgen.unibank.core.commons.build
 .DS_Store
 
 

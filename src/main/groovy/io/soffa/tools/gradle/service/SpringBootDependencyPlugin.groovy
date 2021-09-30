@@ -11,7 +11,7 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
             implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.4')
             implementation platform('org.springframework.cloud:spring-cloud-dependencies:2020.0.3')
         }
-        project.dependencies.add("testImplementation", "org.springframework.boot:spring-boot-starter-test")
+        // project.dependencies.add("testImplementation", "org.springframework.boot:spring-boot-starter-test")
         project.test {
             useJUnitPlatform()
         }

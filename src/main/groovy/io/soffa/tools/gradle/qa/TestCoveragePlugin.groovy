@@ -111,16 +111,16 @@ class JacocoSupport {
                     }
                 }
             }
-            // dependsOn("jacocoTestReport")
+            dependsOn("jacocoTestReport")
         }
 
         project.jacoco {
             toolVersion = "0.8.5"
         }
 
-        project.test {
+        /*project.test {
             finalizedBy("jacocoTestReport")
-        }
+        }*/
 
         project.check {
             dependsOn("jacocoTestCoverageVerification")

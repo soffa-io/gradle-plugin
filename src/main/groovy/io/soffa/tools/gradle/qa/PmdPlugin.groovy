@@ -25,6 +25,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="JUnitTestContainsTooManyAsserts"/>
         <exclude name="ConstantsInInterface"/>
         <exclude name="JUnitAssertionsShouldIncludeMessage" />
+        <exclude name="JUnitTestsShouldIncludeAssert" />
 
     </rule>
     <rule ref="category/java/codestyle.xml">
@@ -41,6 +42,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="DefaultPackage"/>
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>
+        <exclude name="LinguisticNaming"/>
     </rule>
     
     <rule ref="category/java/codestyle.xml/ClassNamingConventions">
@@ -65,6 +67,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="AvoidRethrowingException"/>
         <exclude name="DataClass"/>
         <exclude name="TooManyFields"/>
+        <exclude name="TooManyMethods"/>
     </rule>
     <rule ref="category/java/documentation.xml">
         <exclude name="CommentRequired"/>
