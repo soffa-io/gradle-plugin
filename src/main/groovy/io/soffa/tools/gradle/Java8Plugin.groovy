@@ -19,10 +19,8 @@ class Java8Plugin implements Plugin<Project> {
             new PmdPlugin().apply(project)
         }
 
-        project.afterEvaluate {
-            project.compileJava.options.encoding = 'UTF-8'
-            project.compileJava.options.compilerArgs << '-parameters'
-        }
+        project.compileJava.options.encoding = 'UTF-8'
+        project.compileJava.options.compilerArgs << '-parameters'
 
         project.dependencies{
             testImplementation("com.openpojo:openpojo:0.8.13")
@@ -42,9 +40,11 @@ class Java8Plugin implements Plugin<Project> {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
 
-        project.configurations.all({
-            resolutionStrategy.cacheChangingModulesFor(20, TimeUnit.SECONDS)
-        })
+        project.test {
+            testLogging {
+                events "PASSED", "SKIPPED", "FAILED"
+            }
+        }
 
     }
 

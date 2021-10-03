@@ -6,8 +6,6 @@ import org.gradle.api.publish.maven.MavenPublication
 
 class MavenPublishPlugin implements Plugin<Project> {
 
-    static final String  NEXUS_PUBLISH_PLUGIN = "io.github.gradle-nexus.publish-plugin"
-
     void apply(Project project) {
 
         project.plugins.apply('maven-publish')
@@ -20,25 +18,8 @@ class MavenPublishPlugin implements Plugin<Project> {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
 
-
         if (project.findProperty("sonatype")) {
-
             project.plugins.apply('signing')
-            Project root = project.getRootProject()
-
-            if (!root.plugins.hasPlugin(NEXUS_PUBLISH_PLUGIN)) {
-                root.plugins.apply(NEXUS_PUBLISH_PLUGIN)
-                root.nexusPublishing {
-                    repositories {
-                        sonatype {
-                            // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
-                            username = root.property("ossrhUsername")
-                            password = root.property("ossrhPassword")
-                        }
-                    }
-                }
-            }
-
             project.publishing {
                 publications {
                     maven(MavenPublication) {
