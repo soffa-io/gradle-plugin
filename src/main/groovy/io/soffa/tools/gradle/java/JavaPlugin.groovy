@@ -2,40 +2,39 @@ package io.soffa.tools.gradle.java
 
 import io.soffa.tools.gradle.LombokPlugin
 import io.soffa.tools.gradle.qa.PmdPlugin
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.api.attributes.Usage
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 
-public class JavaPlugin {
+class JavaPlugin {
 
-    public static void apply(Project project, String version) {
+    static void apply(Project project, int version, boolean includeLombok) {
         project.plugins.apply('java')
         project.plugins.apply('java-library')
-        project.setProperty("sourceCompatibility", version)
-        LombokPlugin.applyPlugin(project)
+        if (includeLombok) {
+            LombokPlugin.applyPlugin(project)
+        }
         // project.setProperty("targetCompatibility", "1.8")
         if (project.findProperty("soffa.pmd.disabled") != true) {
             new PmdPlugin().apply(project)
         }
-
-        project.compileJava.options.encoding = 'UTF-8'
-        project.compileJava.options.compilerArgs << '-parameters'
-
-        project.dependencies {
-            testImplementation("com.openpojo:openpojo:0.8.13")
-        }
-
-        // Workaround the Gradle bug resolving multiplatform dependencies.
-        project.configurations.all { c ->
-            // https://github.com/spring-projects/spring-boot/issues/21549
-            if (c.name.contains("productionRuntimeClasspath") || c.name.contains('kapt') || c.name.contains("wire") || c.name.contains("proto")) {
-                c.attributes.attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage.class, Usage.JAVA_RUNTIME))
-            }
+        project.java {
+            sourceCompatibility = JavaLanguageVersion.of(version).toString()
         }
 
         project.compileJava {
+            options.encoding = 'UTF-8'
+            options.compilerArgs << '-parameters'
+            if (version > 8) {
+                options.compilerArgs << '--release'
+                options.compilerArgs << '8'
+            }
             options.warnings = false
             options.deprecation = false
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+
+        project.javadoc {
+            options.addStringOption("Xdoclint:none", "quiet")
         }
 
         project.test {
