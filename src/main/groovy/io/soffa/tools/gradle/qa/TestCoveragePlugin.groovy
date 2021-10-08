@@ -3,8 +3,6 @@ package io.soffa.tools.gradle.qa
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-import java.text.Bidi
-
 class TestCoverageL0 implements Plugin<Project> {
     void apply(Project project) {
         JacocoSupport.applyTestCoverage(project, 0.0, 0.0)

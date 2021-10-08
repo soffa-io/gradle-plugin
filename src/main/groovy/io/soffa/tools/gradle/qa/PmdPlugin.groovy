@@ -1,10 +1,7 @@
 package io.soffa.tools.gradle.qa
 
-
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-
-import static io.soffa.tools.gradle.Ansi.*
 
 class PmdPlugin implements Plugin<Project> {
 

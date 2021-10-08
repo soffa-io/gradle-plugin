@@ -1,18 +1,16 @@
-package io.soffa.tools.gradle
+package io.soffa.tools.gradle.java
 
+import io.soffa.tools.gradle.LombokPlugin
 import io.soffa.tools.gradle.qa.PmdPlugin
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.attributes.Usage
 
-import java.util.concurrent.TimeUnit
+public class JavaPlugin {
 
-class Java8Plugin implements Plugin<Project> {
-
-    void apply(Project project) {
+    public static void apply(Project project, String version) {
         project.plugins.apply('java')
         project.plugins.apply('java-library')
-        project.setProperty("sourceCompatibility", "1.8")
+        project.setProperty("sourceCompatibility", version)
         LombokPlugin.applyPlugin(project)
         // project.setProperty("targetCompatibility", "1.8")
         if (project.findProperty("soffa.pmd.disabled") != true) {
@@ -22,7 +20,7 @@ class Java8Plugin implements Plugin<Project> {
         project.compileJava.options.encoding = 'UTF-8'
         project.compileJava.options.compilerArgs << '-parameters'
 
-        project.dependencies{
+        project.dependencies {
             testImplementation("com.openpojo:openpojo:0.8.13")
         }
 
