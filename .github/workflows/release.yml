@@ -48,7 +48,6 @@ jobs:
   publish-to-sonatype:
     needs: check
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
     permissions:
       contents: read
       packages: write
@@ -57,7 +56,7 @@ jobs:
       - name: Publish artifact to public Sonatype Nexus
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg
-          gradle sign -x check -Prelease=true publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
+          gradle sign -x check publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository \
             -Psonatype=true \
             -PossrhUsername=$SONATYPE_USERNAME \
             -PossrhPassword=$SONATYPE_PASSWORD \

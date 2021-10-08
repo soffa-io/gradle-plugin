@@ -14,27 +14,20 @@ class JavaPlugin {
         if (includeLombok) {
             LombokPlugin.applyPlugin(project)
         }
-        // project.setProperty("targetCompatibility", "1.8")
+        project.setProperty("sourceCompatibility",  JavaLanguageVersion.of(version).toString())
         if (project.findProperty("soffa.pmd.disabled") != true) {
             new PmdPlugin().apply(project)
-        }
-        project.java {
-            sourceCompatibility = JavaLanguageVersion.of(version).toString()
         }
 
         project.compileJava {
             options.encoding = 'UTF-8'
             options.compilerArgs << '-parameters'
-            if (version > 8) {
-                options.compilerArgs << '--release'
-                options.compilerArgs << '8'
-            }
             options.warnings = false
             options.deprecation = false
         }
 
         project.javadoc {
-            options.addStringOption("Xdoclint:none", "quiet")
+            options.addStringOption("Xdoclint:none", "-quiet")
         }
 
         project.test {
