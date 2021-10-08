@@ -4,8 +4,6 @@ import org.gradle.api.Project
 
 class CucumberPlugin extends JUnit5Plugin {
 
-    // apply plugin: 'unibank.cucumber'
-
     @Override
     void apply(Project project) {
 
