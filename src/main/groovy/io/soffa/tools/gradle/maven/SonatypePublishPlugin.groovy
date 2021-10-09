@@ -9,19 +9,13 @@ class SonatypePublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
         project.plugins.apply("signing")
-
-        if (project.findProperty("skip-sonatype") != null) {
-            println("INFO: Sonatype config skipped")
-            return
-        }
-
         project.plugins.apply(NEXUS_PUBLISH_PLUGIN)
         project.nexusPublishing {
             repositories {
                 sonatype {
                     // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
-                    username = project.property("ossrhUsername")
-                    password = project.property("ossrhPassword")
+                    username = project.findProperty("ossrhUsername")
+                    password = project.findProperty("ossrhPassword")
                 }
             }
         }
