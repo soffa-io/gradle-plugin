@@ -5,12 +5,6 @@ on:
     branches: [ master, develop ]
 
 env:
-  MAVEN_PUBLISHING_USER: ${{ github.actor }}
-  MAVEN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
-  MAVEN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
-  PRV_MAVEN_URL: https://maven.pkg.github.com/soffa-io/artifacts
-  PRV_MAVEN_USER: ${{ github.actor }}
-  PRV_MAVEN_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
   SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
   SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
@@ -29,21 +23,6 @@ jobs:
           distribution: 'adopt'
       - name: Run checks
         run: gradle check
-
-  publish-to-github:
-    needs: check
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v2
-      - name: Publish snapshot artifact to Github
-        if: ${{ github.ref == 'refs/heads/develop' }}
-        run: gradle publish -x test -Psnapshot=true
-      - name: Publish artifact to Github
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: gradle publish -x test -Prelease=true
 
   publish-to-sonatype:
     needs: check

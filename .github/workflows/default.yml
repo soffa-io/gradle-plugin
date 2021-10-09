@@ -6,12 +6,6 @@ on:
       - master
       - develop
 env:
-  MAVEN_PUBLISHING_USER: ${{ github.actor }}
-  MAVEN_PUBLISHING_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
-  MAVEN_PUBLISHING_URL: https://maven.pkg.github.com/soffa-io/artifacts
-  PRV_MAVEN_URL: https://maven.pkg.github.com/soffa-io/artifacts
-  PRV_MAVEN_USER: ${{ github.actor }}
-  PRV_MAVEN_PASSWORD: ${{ secrets.ARTIFACTS_TOKEN }}
   SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
   SIGNING_KEYID: ${{ secrets.OSSRH_SIGNING_KEYID }}
