@@ -10,7 +10,9 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
         project.dependencies {
             implementation platform('org.springframework.boot:spring-boot-dependencies:2.5.5')
             implementation platform('org.springframework.cloud:spring-cloud-dependencies:2020.0.4')
-            testImplementation "org.springframework.boot:spring-boot-starter-test"
+            testImplementation("org.springframework.boot:spring-boot-starter-test") {
+                exclude(group: "com.vaadin.external.google")
+            }
         }
 
         project.test {

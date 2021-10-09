@@ -9,7 +9,7 @@ class MavenPublishPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.plugins.apply('maven-publish')
-
+        project.plugins.apply('signing')
         String projectVersion = project.version
 
         if (project.hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
@@ -19,7 +19,7 @@ class MavenPublishPlugin implements Plugin<Project> {
         }
 
         if (project.findProperty("sonatype")) {
-            project.plugins.apply('signing')
+
             project.publishing {
                 publications {
                     maven(MavenPublication) {
@@ -89,16 +89,13 @@ class MavenPublishPlugin implements Plugin<Project> {
             }
         }
 
-
         project.java {
             withJavadocJar()
             withSourcesJar()
         }
 
-        if (project.plugins.hasPlugin("signing")) {
-            project.signing {
-                sign(project.publishing.publications["maven"])
-            }
+        project.signing {
+            sign(project.publishing.publications["maven"])
         }
     }
 

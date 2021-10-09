@@ -9,6 +9,7 @@ class SonatypePublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
         project.plugins.apply(NEXUS_PUBLISH_PLUGIN)
+        project.plugins.apply("signing")
         project.nexusPublishing {
             repositories {
                 sonatype {
