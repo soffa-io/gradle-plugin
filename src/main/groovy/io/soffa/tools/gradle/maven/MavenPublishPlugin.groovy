@@ -72,9 +72,41 @@ class MavenPublishPlugin implements Plugin<Project> {
                 }
             }
 
-            String mvnPublishingUrl = project.findProperty("mavenPublishingUrl") ?: System.getenv("MAVEN_PUBLISHING_URL")
-            String mvnPublishingUser = project.findProperty("mavenPublishingUser") ?: System.getenv("MAVEN_PUBLISHING_USER")
-            String mvnPublishingPwd = project.findProperty("mavenPublishingPassword") ?: System.getenv("MAVEN_PUBLISHING_PASSWORD")
+            String mvnPublishingUrl =
+                project.findProperty("mvnRepo") ?:
+                    project.findProperty("mavenUrl") ?:
+                        project.findProperty("mavenRepo") ?:
+                            project.findProperty("mavenPublishingUrl") ?:
+                                System.getenv("MVN_REPO") ?:
+                                    System.getenv("MAVEN_URL") ?:
+                                        System.getenv("MAVEN_REPO") ?:
+                                            System.getenv("MVN_PUBLISHING_URL") ?:
+                                                System.getenv("MAVEN_PUBLISHING_URL")
+
+            String mvnPublishingUser = project.findProperty("mvnUser") ?:
+                project.findProperty("mavenUser") ?:
+                    project.findProperty("mavenPublishingUser") ?:
+                        System.getenv("MVN_USER") ?:
+                            System.getenv("MAVEN_USER") ?:
+                                System.getenv("MAVEN_PUBLISHING_USER")
+
+            String mvnPublishingPwd = project.findProperty("mvnPassword") ?:
+                project.findProperty("mavenPassword") ?:
+                    project.findProperty("mavenPublishingPassword") ?:
+                        System.getenv("MVN_PASSWORD") ?:
+                            System.getenv("MAVEN_PASSWORD") ?:
+                                System.getenv("MAVEN_PUBLISHING_PASSWORD")
+
+            if (mvnPublishingUrl == null || mvnPublishingUser == null || mvnPublishingPwd == null) {
+                println("WARN: Incomplete maven publishing received")
+                println("Url: $mvnPublishingUrl")
+                println("User: $mvnPublishingUser")
+                if (mvnPublishingPwd == null || mvnPublishingPwd.isEmpty()) {
+                    println("Password: EMPTY")
+                } else {
+                    println("Password: **************")
+                }
+            }
 
             if (mvnPublishingUrl != null) {
                 project.publishing.repositories {
