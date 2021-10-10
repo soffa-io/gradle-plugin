@@ -54,8 +54,8 @@ class JavaPlugin {
                         TestLogEvent.STANDARD_OUT
                     exceptionFormat TestExceptionFormat.FULL
                 }*/
-                info.events = debug.events
-                info.exceptionFormat = debug.exceptionFormat
+                // info.events = debug.events
+                // info.exceptionFormat = debug.exceptionFormat
 
                 afterSuite { desc, result ->
                     if (!desc.parent) { // will match the outermost suite
