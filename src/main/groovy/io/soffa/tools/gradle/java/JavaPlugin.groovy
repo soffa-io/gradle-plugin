@@ -33,17 +33,32 @@ class JavaPlugin {
             options.addStringOption("Xdoclint:none", "-quiet")
         }
 
+        boolean isVerbose = Boolean.parseBoolean((project.findProperty("verbose") ?: false).toString()) ||
+            Boolean.parseBoolean(System.getenv("CI"));
+
         project.test {
             testLogging {
-                events TestLogEvent.FAILED,
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.STANDARD_OUT
 
-                exceptionFormat TestExceptionFormat.FULL
-                showExceptions true
-                showCauses true
-                showStackTraces true
+                if (isVerbose) {
+                    events TestLogEvent.FAILED,
+                        TestLogEvent.PASSED,
+                        TestLogEvent.SKIPPED,
+                        TestLogEvent.STANDARD_OUT
+
+                    exceptionFormat TestExceptionFormat.FULL
+                    showExceptions true
+                    showCauses true
+                    showStackTraces true
+
+                }else {
+                    events TestLogEvent.FAILED,
+                        TestLogEvent.PASSED,
+                        TestLogEvent.SKIPPED
+                    exceptionFormat TestExceptionFormat.SHORT
+                    showExceptions true
+                    showCauses false
+                    showStackTraces false
+                }
 
                 /*debug {
                     events TestLogEvent.STARTED,
