@@ -15,13 +15,21 @@ class JavaPlugin {
             LombokPlugin.applyPlugin(project)
         }
         project.setProperty("sourceCompatibility",  JavaLanguageVersion.of(version).toString())
+        project.setProperty("targetCompatibility", JavaVersion.VERSION_11)
         if (project.findProperty("soffa.pmd.disabled") != true) {
             new PmdPlugin().apply(project)
         }
 
+        project.java {
+            modularity.inferModulePath = false
+        }
+
         project.compileJava {
+            modularity.inferModulePath = false
             options.encoding = 'UTF-8'
             options.compilerArgs << '-parameters'
+            options.compilerArgs << '--release'
+            options.compilerArgs << '8'
             options.warnings = false
             options.deprecation = false
         }

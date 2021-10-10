@@ -18,7 +18,7 @@ class MavenPublishPlugin implements Plugin<Project> {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
 
-        if (project.findProperty("sonatype")) {
+        if (project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
 
             project.publishing {
                 publications {
