@@ -4,6 +4,8 @@ import io.soffa.tools.gradle.LombokPlugin
 import io.soffa.tools.gradle.qa.PmdPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 
 class JavaPlugin {
@@ -33,7 +35,36 @@ class JavaPlugin {
 
         project.test {
             testLogging {
-                events "PASSED", "SKIPPED", "FAILED"
+                events TestLogEvent.FAILED,
+                    TestLogEvent.PASSED,
+                    TestLogEvent.SKIPPED,
+                    TestLogEvent.STANDARD_OUT
+
+                exceptionFormat TestExceptionFormat.FULL
+                showExceptions true
+                showCauses true
+                showStackTraces true
+
+                /*debug {
+                    events TestLogEvent.STARTED,
+                        TestLogEvent.FAILED,
+                        TestLogEvent.PASSED,
+                        TestLogEvent.SKIPPED,
+                        TestLogEvent.STANDARD_ERROR,
+                        TestLogEvent.STANDARD_OUT
+                    exceptionFormat TestExceptionFormat.FULL
+                }*/
+                info.events = debug.events
+                info.exceptionFormat = debug.exceptionFormat
+
+                afterSuite { desc, result ->
+                    if (!desc.parent) { // will match the outermost suite
+                        def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
+                        def startItem = '|  ', endItem = '  |'
+                        def repeatLength = startItem.length() + output.length() + endItem.length()
+                        println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                    }
+                }
             }
         }
 
