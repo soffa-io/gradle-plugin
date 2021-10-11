@@ -33,4 +33,12 @@ class Ansi {
         ansiValue + text + NORMAL
     }
 
+    static String red(String text) {
+        RED + text + NORMAL
+    }
+
+    static String green(String text) {
+        GREEN + text + NORMAL
+    }
+
 }
