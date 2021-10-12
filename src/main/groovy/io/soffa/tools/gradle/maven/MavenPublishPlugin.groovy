@@ -97,17 +97,6 @@ class MavenPublishPlugin implements Plugin<Project> {
                             System.getenv("MAVEN_PASSWORD") ?:
                                 System.getenv("MAVEN_PUBLISHING_PASSWORD")
 
-            if (mvnPublishingUrl == null || mvnPublishingUser == null || mvnPublishingPwd == null) {
-                println("WARN: Incomplete maven publishing received")
-                println("Url: $mvnPublishingUrl")
-                println("User: $mvnPublishingUser")
-                if (mvnPublishingPwd == null || mvnPublishingPwd.isEmpty()) {
-                    println("Password: EMPTY")
-                } else {
-                    println("Password: **************")
-                }
-            }
-
             if (mvnPublishingUrl != null) {
                 project.publishing.repositories {
                     maven {
