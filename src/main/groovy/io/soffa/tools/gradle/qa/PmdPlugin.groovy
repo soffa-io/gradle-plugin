@@ -13,7 +13,7 @@ class PmdPlugin implements Plugin<Project> {
         }
         if (!configFile.exists() || (System.currentTimeMillis() - configFile.lastModified() > 1000 * 60)) {
             configFile.write('''<?xml version="1.0"?>
-<ruleset name="SGABS"
+<ruleset name="SOFFA"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
@@ -66,6 +66,15 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="TooManyFields"/>
         <exclude name="TooManyMethods"/>
     </rule>
+    
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="classReportLevel" value="80" />
+            <property name="methodReportLevel" value="13" />
+            <property name="cycloOptions" value="" />
+        </properties>
+    </rule>
+    
     <rule ref="category/java/documentation.xml">
         <exclude name="CommentRequired"/>
         <exclude name="UncommentedEmptyConstructor"/>
