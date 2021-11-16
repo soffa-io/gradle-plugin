@@ -9,7 +9,7 @@ class MavenPublishPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.plugins.apply('maven-publish')
-        project.plugins.apply('signing')
+
         String projectVersion = project.version
 
         if (project.hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
@@ -19,7 +19,7 @@ class MavenPublishPlugin implements Plugin<Project> {
         }
 
         if (project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
-
+            project.plugins.apply('signing')
             project.publishing {
                 publications {
                     maven(MavenPublication) {
@@ -60,6 +60,10 @@ class MavenPublishPlugin implements Plugin<Project> {
             project.ext["signing.keyId"] = project.property("signing.keyId")
             project.ext["signing.password"] = project.property("signing.password")
             project.ext["signing.secretKeyRingFile"] = project.property("signing.secretKeyRingFile")
+
+            project.signing {
+                sign(project.publishing.publications["maven"])
+            }
 
         } else {
 
@@ -115,9 +119,7 @@ class MavenPublishPlugin implements Plugin<Project> {
             withSourcesJar()
         }
 
-        project.signing {
-            sign(project.publishing.publications["maven"])
-        }
+
     }
 
 }
