@@ -23,6 +23,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="ConstantsInInterface"/>
         <exclude name="JUnitAssertionsShouldIncludeMessage" />
         <exclude name="JUnitTestsShouldIncludeAssert" />
+        <exclude name="AvoidUsingHardCodedIP" />
 
     </rule>
     <rule ref="category/java/codestyle.xml">
