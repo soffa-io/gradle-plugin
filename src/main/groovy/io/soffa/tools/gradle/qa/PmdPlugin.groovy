@@ -66,6 +66,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="DataClass"/>
         <exclude name="TooManyFields"/>
         <exclude name="TooManyMethods"/>
+        <exclude name="CouplingBetweenObjects"/>
     </rule>
     
     <rule ref="category/java/design.xml/CyclomaticComplexity">
