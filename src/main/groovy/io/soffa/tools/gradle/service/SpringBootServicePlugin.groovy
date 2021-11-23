@@ -11,8 +11,17 @@ class SpringBootServicePlugin extends SpringBootDependencyPlugin {
         project.jar {
             enabled = false
         }
+        /*
         project.bootJar {
             classifier = 'application'
+        }
+         */
+
+        project.configurations {
+            [apiElements, runtimeElements].each {
+                it.outgoing.artifacts.removeIf { it.buildDependencies.getDependencies(null).contains(jar) }
+                it.outgoing.artifact(project.bootJar)
+            }
         }
     }
 
