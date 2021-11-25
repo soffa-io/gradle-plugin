@@ -87,6 +87,18 @@ class MavenPublishPlugin implements Plugin<Project> {
                                             System.getenv("MVN_PUBLISHING_URL") ?:
                                                 System.getenv("MAVEN_PUBLISHING_URL")
 
+
+            String mvnSnapshotPublishingUrl =
+                project.findProperty("mvnSnaphostRepo") ?:
+                    project.findProperty("mavenSnapshotUrl") ?:
+                        project.findProperty("mavenSnapshotRepo") ?:
+                            project.findProperty("mavenSnapshotPublishingUrl") ?:
+                                System.getenv("MVN_SNAPSHOT_REPO") ?:
+                                    System.getenv("MAVEN_SNAPSHOT_URL") ?:
+                                        System.getenv("MAVEN_SNAPSHOT_REPO") ?:
+                                            System.getenv("MVN_SNAPSHOT_PUBLISHING_URL") ?:
+                                                System.getenv("MAVEN_SNAPSHOT_PUBLISHING_URL")
+
             String mvnPublishingUser = project.findProperty("mvnUser") ?:
                 project.findProperty("mavenUser") ?:
                     project.findProperty("mavenPublishingUser") ?:
@@ -104,7 +116,11 @@ class MavenPublishPlugin implements Plugin<Project> {
             if (mvnPublishingUrl != null) {
                 project.publishing.repositories {
                     maven {
-                        url = mvnPublishingUrl
+                        if (projectVersion.endsWith("-SNAPSHOT")) {
+                            url = mvnSnapshotPublishingUrl
+                        } else {
+                            url = mvnPublishingUrl
+                        }
                         credentials {
                             username = mvnPublishingUser
                             password = mvnPublishingPwd
