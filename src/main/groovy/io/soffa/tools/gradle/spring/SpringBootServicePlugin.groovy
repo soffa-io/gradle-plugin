@@ -1,4 +1,4 @@
-package io.soffa.tools.gradle.service
+package io.soffa.tools.gradle.spring
 
 import org.gradle.api.Project
 

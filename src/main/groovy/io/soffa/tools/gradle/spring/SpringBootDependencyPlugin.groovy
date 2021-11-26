@@ -1,4 +1,4 @@
-package io.soffa.tools.gradle.service
+package io.soffa.tools.gradle.spring
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -17,6 +17,10 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
 
         project.test {
             useJUnitPlatform()
+        }
+
+        if (project.plugins.hasPlugin("kotlin")) {
+            project.plugins.apply("kotlin-spring")
         }
 
     }
