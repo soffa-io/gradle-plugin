@@ -80,20 +80,20 @@ class MavenPublishPlugin implements Plugin<Project> {
 
             String mvnPublishingUrl =
                 project.findProperty("mvnRepo") ?:
-                project.findProperty("mvnReleaseRepo") ?:
-                    project.findProperty("mavenUrl") ?:
-                    project.findProperty("mavenReleaseUrl") ?:
-                        project.findProperty("mavenRepo") ?:
-                        project.findProperty("mavenReleaseRepo") ?:
-                            project.findProperty("mavenPublishingUrl") ?:
-                                System.getenv("MVN_REPO") ?:
-                                System.getenv("MVN_RELEASE_REPO") ?:
-                                    System.getenv("MAVEN_URL") ?:
-                                    System.getenv("MAVEN_RELEASE_URL") ?:
-                                        System.getenv("MAVEN_REPO") ?:
-                                        System.getenv("MAVEN_RELEASE_REPO") ?:
-                                            System.getenv("MVN_PUBLISHING_URL") ?:
-                                                System.getenv("MAVEN_PUBLISHING_URL")
+                    project.findProperty("mvnReleaseRepo") ?:
+                        project.findProperty("mavenUrl") ?:
+                            project.findProperty("mavenReleaseUrl") ?:
+                                project.findProperty("mavenRepo") ?:
+                                    project.findProperty("mavenReleaseRepo") ?:
+                                        project.findProperty("mavenPublishingUrl") ?:
+                                            System.getenv("MVN_REPO") ?:
+                                                System.getenv("MVN_RELEASE_REPO") ?:
+                                                    System.getenv("MAVEN_URL") ?:
+                                                        System.getenv("MAVEN_RELEASE_URL") ?:
+                                                            System.getenv("MAVEN_REPO") ?:
+                                                                System.getenv("MAVEN_RELEASE_REPO") ?:
+                                                                    System.getenv("MVN_PUBLISHING_URL") ?:
+                                                                        System.getenv("MAVEN_PUBLISHING_URL")
 
 
             String mvnSnapshotPublishingUrl =
@@ -112,14 +112,16 @@ class MavenPublishPlugin implements Plugin<Project> {
                     project.findProperty("mavenPublishingUser") ?:
                         System.getenv("MVN_USER") ?:
                             System.getenv("MAVEN_USER") ?:
-                                System.getenv("MAVEN_PUBLISHING_USER")
+                                System.getenv("MAVEN_USR") ?:
+                                    System.getenv("MAVEN_PUBLISHING_USER")
 
             String mvnPublishingPwd = project.findProperty("mvnPassword") ?:
                 project.findProperty("mavenPassword") ?:
                     project.findProperty("mavenPublishingPassword") ?:
                         System.getenv("MVN_PASSWORD") ?:
                             System.getenv("MAVEN_PASSWORD") ?:
-                                System.getenv("MAVEN_PUBLISHING_PASSWORD")
+                                System.getenv("MAVEN_PSW") ?:
+                                    System.getenv("MAVEN_PUBLISHING_PASSWORD")
 
             if (mvnPublishingUrl != null) {
                 project.publishing.repositories {
