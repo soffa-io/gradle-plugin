@@ -41,6 +41,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>
         <exclude name="LinguisticNaming"/>
+        <exclude name="UnnecessaryFullyQualifiedName"/>
     </rule>
     
     <rule ref="category/java/codestyle.xml/ClassNamingConventions">
