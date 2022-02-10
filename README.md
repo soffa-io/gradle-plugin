@@ -1,3 +1,5 @@
 ## soffa/gradle-plugin
 
-Document me
+
+![Release](https://img.shields.io/badge/release-2.2.2-green.svg?style=flat)
+
