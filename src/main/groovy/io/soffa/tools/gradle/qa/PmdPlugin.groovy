@@ -88,6 +88,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="BeanMembersShouldSerialize"/>
         <exclude name="AssignmentInOperand"/>
         <exclude name="UseLocaleWithCaseConversions"/>
+        <exclude name="AvoidInstanceofChecksInCatchClause:"/>
     </rule>
     <rule ref="category/java/multithreading.xml">
         <exclude name="DoNotUseThreads" />
