@@ -3,7 +3,7 @@ package io.soffa.tools.gradle.maven
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public class SonatypePublishPlugin implements Plugin<Project> {
+public class SonatypeLegacyPublishPlugin implements Plugin<Project> {
 
     public static final String NEXUS_PUBLISH_PLUGIN = "io.github.gradle-nexus.publish-plugin"
 
@@ -13,10 +13,9 @@ public class SonatypePublishPlugin implements Plugin<Project> {
         project.nexusPublishing {
             repositories {
                 sonatype {
+                    // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
                     username = project.findProperty("ossrhUsername")
                     password = project.findProperty("ossrhPassword")
-                    nexusUrl.set(new URI("https://s01.oss.sonatype.org/service/local/"))
-                    snapshotRepositoryUrl.set(new URI("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
                 }
             }
         }
