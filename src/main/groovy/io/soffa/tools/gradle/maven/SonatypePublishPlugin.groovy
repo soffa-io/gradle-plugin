@@ -3,12 +3,12 @@ package io.soffa.tools.gradle.maven
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-public class SonatypePublishPlugin implements Plugin<Project> {
+class SonatypePublishPlugin implements Plugin<Project> {
 
     public static final String NEXUS_PUBLISH_PLUGIN = "io.github.gradle-nexus.publish-plugin"
 
     void apply(Project project) {
-        project.plugins.apply("signing")
+        // project.plugins.apply("signing")
         project.plugins.apply(NEXUS_PUBLISH_PLUGIN)
         project.nexusPublishing {
             repositories {
