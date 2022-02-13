@@ -7,7 +7,10 @@ import org.gradle.api.publish.maven.MavenPublication
 class MavenPublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
-
+        boolean skipPublish = Boolean.parseBoolean(System.getenv("NO_PUBLISH"));
+        if (skipPublish) {
+            return;
+        }
         project.plugins.apply('maven-publish')
 
         String projectVersion = project.version
@@ -18,9 +21,9 @@ class MavenPublishPlugin implements Plugin<Project> {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
 
-        boolean noPublish = Boolean.parseBoolean(System.getenv("NO_PUBLISH"));
 
-        if (!noPublish && project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
+
+        if (project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
             project.plugins.apply('signing')
             project.publishing {
                 publications {
