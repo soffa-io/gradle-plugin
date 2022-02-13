@@ -18,9 +18,9 @@ class MavenPublishPlugin implements Plugin<Project> {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
 
-        boolean isCI = Boolean.parseBoolean((System.getenv("CI") ?: project.findProperty("ci") ?: "false").toString())
+        boolean noPublish = Boolean.parseBoolean(System.getenv("NO_PUBLISH"));
 
-        if (isCI && project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
+        if (!noPublish && project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
             project.plugins.apply('signing')
             project.publishing {
                 publications {
