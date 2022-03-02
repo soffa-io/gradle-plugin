@@ -1,13 +1,12 @@
 package io.soffa.tools.gradle
 
-import io.soffa.tools.gradle.java.Java8Plugin
 import io.soffa.tools.gradle.java.JavaPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class KotlinPlugin implements Plugin<Project> {
 
-    public static final String kotlinVersion = "1.6.0"
+    public static final String kotlinVersion = "1.6.10"
     
     void apply(Project project) {
         JavaPlugin.apply(project, 8, false)
@@ -18,6 +17,12 @@ class KotlinPlugin implements Plugin<Project> {
 
         }
         project.plugins.apply("kotlin")
+        project.plugins.apply("kotlin-allopen")
+
+        project.allOpen {
+            annotation("javax.persistence.Entity")
+            annotation("javax.inject.Named")
+        }
     }
 
 
