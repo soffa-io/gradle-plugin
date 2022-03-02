@@ -4,6 +4,7 @@ on:
   push:
     branches-ignore:
       - master
+      - main
       - develop
 env:
   SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
