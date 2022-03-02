@@ -6,6 +6,7 @@ class SpringBootServicePlugin extends SpringBootDependencyPlugin {
 
     void apply(Project project) {
         project.plugins.apply("org.springframework.boot")
+        project.plugins.apply("com.google.cloud.tools.jib")
         super.apply(project)
         // project.dependencies.add("testImplementation", "org.springframework.boot:spring-boot-starter-test")
         project.jar {
