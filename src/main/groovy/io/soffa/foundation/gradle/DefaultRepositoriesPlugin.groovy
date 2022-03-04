@@ -14,7 +14,6 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
         project.repositories {
             mavenLocal()
             mavenCentral()
-            jcenter()
             maven {
                 setUrl("https://oss.sonatype.org/content/groups/public")
             }

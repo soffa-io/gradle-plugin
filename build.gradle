@@ -38,7 +38,7 @@ dependencies {
     implementation("io.github.gradle-nexus:publish-plugin:1.1.0")
     implementation("org.jacoco:org.jacoco.report:0.8.7")
     implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
-    implementation('org.springframework.boot:spring-boot-gradle-plugin:2.6.3')
+    implementation('org.springframework.boot:spring-boot-gradle-plugin:2.6.4')
     implementation("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     implementation("org.jetbrains.kotlin:kotlin-allopen:1.6.10")

@@ -7,7 +7,12 @@ import org.gradle.api.publish.maven.MavenPublication
 class MavenPublishPlugin implements Plugin<Project> {
 
     void apply(Project project) {
-        boolean skipPublish = Boolean.parseBoolean(System.getenv("NO_PUBLISH"));
+
+        boolean skipPublish = Boolean.parseBoolean(System.getenv("NO_PUBLISH")) ||
+            Boolean.parseBoolean(System.getenv("SKIP_PUBLISH")) ||
+            Boolean.parseBoolean(System.getenv("SKIP_MAVEN_PUBLISH")) ||
+            project.findProperty("skipMavenPublish") != null;
+
         if (skipPublish) {
             return;
         }
@@ -20,8 +25,6 @@ class MavenPublishPlugin implements Plugin<Project> {
         } else if (project.hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
-
-
 
         if (project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
             project.plugins.apply('signing')
@@ -125,6 +128,11 @@ class MavenPublishPlugin implements Plugin<Project> {
                             System.getenv("MAVEN_PASSWORD") ?:
                                 System.getenv("MAVEN_PSW") ?:
                                     System.getenv("MAVEN_PUBLISHING_PASSWORD")
+
+
+            println "mvnPublishingUrl = $mvnPublishingUrl"
+            println "mvnPublishingUser = $mvnPublishingUser"
+            println "mvnPublishingPwd = *******"
 
             if (mvnPublishingUrl != null) {
                 project.publishing.repositories {
