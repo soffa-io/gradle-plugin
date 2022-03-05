@@ -60,9 +60,9 @@ if (hasProperty("ossrhUsername")) {
             maven(MavenPublication) {
                 from components.java
                 pom {
-                    name.set("SOFFA Gradle Plugin")
-                    description.set("Gradle plugins.")
-                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    name.set("foundation-gradle-plugin")
+                    description.set("A set of gradle plugins for Foundation")
+                    url.set("https://github.com/soffalabs/foundation-gradle-plugin")
                     version = projectVersion
                     licenses {
                         license {
@@ -72,15 +72,15 @@ if (hasProperty("ossrhUsername")) {
                     }
                     developers {
                         developer {
-                            id.set("soffa-io")
+                            id.set("soffalabs")
                             name.set("SOFFA")
-                            email.set("noreply@soffa.io")
+                            email.set("noreply@soffa.dev")
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
-                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        connection.set("scm:git:git://soffalabs/foundation-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffalabs/foundation-gradle-plugin.git")
+                        url.set("https://github.com/soffalabs/foundation-gradle-plugin")
                     }
                 }
             }
@@ -93,6 +93,8 @@ if (hasProperty("ossrhUsername")) {
                 // stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID"))
                 username.set("${property("ossrhUsername")}")
                 password.set("${property("ossrhPassword")}")
+                nexusUrl.set(new URI("https://s01.oss.sonatype.org/service/local/"))
+                snapshotRepositoryUrl.set(new URI("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
             }
         }
     }
@@ -110,7 +112,7 @@ if (hasProperty("ossrhUsername")) {
                 pom {
                     name.set("SOFFA Gradle Plugin")
                     description.set("A gradle plugin with useful plugins.")
-                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    url.set("https://github.com/soffalabs/foundation-gradle-plugin")
                     version = projectVersion
                     licenses {
                         license {
@@ -120,15 +122,15 @@ if (hasProperty("ossrhUsername")) {
                     }
                     developers {
                         developer {
-                            id.set("soffa-io")
+                            id.set("soffalabs")
                             name.set("SOFFA")
                             email.set("noreply@soffa.io")
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
-                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        connection.set("scm:git:git://soffalabs/foundation-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffalabs/foundation-gradle-plugin.git")
+                        url.set("https://github.com/soffalabs/foundation-gradle-plugin")
                     }
                 }
             }
