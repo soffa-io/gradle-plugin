@@ -14,6 +14,6 @@ class JUnit5Plugin extends JUnitConfigPlugin {
             testImplementation("org.mockito:mockito-junit-jupiter:4.3.1")
             testImplementation("com.openpojo:openpojo:0.9.1")
         }
-        Object.apply(project)
+        super.apply(project)
     }
 }
