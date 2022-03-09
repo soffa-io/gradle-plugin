@@ -13,8 +13,6 @@ class JUnit5Plugin extends JUnitConfigPlugin {
             testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
             testImplementation("org.mockito:mockito-junit-jupiter:4.3.1")
             testImplementation("com.openpojo:openpojo:0.9.1")
-            runtimeOnly("com.intuit.karate:karate-junit5:1.2.0.RC4")
-            testImplementation("com.intuit.karate:karate-junit5:1.2.0.RC4")
         }
         super.apply(project)
     }
