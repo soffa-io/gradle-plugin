@@ -3,9 +3,6 @@ package dev.soffa.foundation.gradle.maven
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.bundling.Jar
-import org.gradle.api.tasks.javadoc.Javadoc
-import org.gradle.external.javadoc.JavadocMemberLevel
 
 class MavenPublishPlugin implements Plugin<Project> {
 
@@ -22,15 +19,29 @@ class MavenPublishPlugin implements Plugin<Project> {
 
         String projectVersion = project.version
 
-        project.javadoc {
-            source = project.sourceSets.main.allJava
-        }
-
         if (project.hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
             projectVersion += "-SNAPSHOT"
         } else if (project.hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
             projectVersion = projectVersion.replace("-SNAPSHOT", "")
         }
+
+        project.java {
+            withJavadocJar()
+            withSourcesJar()
+        }
+
+        /*
+          project.tasks.register("javadocJar", Jar.class) {
+              from project.javadoc
+              archiveClassifier.set('javadoc')
+              exclude "com/intuit/karate/**", "io/netty/**"
+          }
+
+          project.tasks.register("sourceJar", Jar.class) {
+              from project.sourceSets.main.allJava
+              archiveClassifier.set('sources')
+          }*/
+
 
         if (project.rootProject.plugins.hasPlugin(SonatypePublishPlugin.NEXUS_PUBLISH_PLUGIN)) {
             configureSonatypePublishing(project, projectVersion)
@@ -38,10 +49,6 @@ class MavenPublishPlugin implements Plugin<Project> {
             configureInternalPublishing(project, projectVersion)
         }
 
-        project.java {
-            // withJavadocJar()
-            // withSourcesJar()
-        }
     }
 
     private static String lookupProperty(Project project, String... candidates) {
@@ -142,12 +149,13 @@ class MavenPublishPlugin implements Plugin<Project> {
     private void configureSonatypePublishing(Project project, String projectVersion) {
         project.plugins.apply('signing')
 
-
-
         project.publishing {
             publications {
                 maven(MavenPublication) {
                     from project.components.java
+
+                    // artifact project.sourceJar
+                    // artifact project.javadocJar
 
                     groupId = project.property("group")
                     artifactId = project.name

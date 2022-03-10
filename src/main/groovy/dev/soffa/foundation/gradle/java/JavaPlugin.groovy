@@ -3,6 +3,7 @@ package dev.soffa.foundation.gradle.java
 import dev.soffa.foundation.gradle.LombokPlugin
 import dev.soffa.foundation.gradle.qa.PmdPlugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.jvm.toolchain.JavaLanguageVersion
@@ -31,9 +32,11 @@ class JavaPlugin {
         }
 
         project.javadoc {
+            exclude "com/intuit/karate/**", "io/netty/**"
             options.addStringOption("Xdoclint:none", "-quiet")
-            source = project.sourceSets.main.allJava
-            //classpath = project.configurations.compileClasspath
+            source project.sourceSets.main.allJava
+            failOnError = false
+            // classpath = project.sourceSets.main.runtimeClasspath
         }
 
         boolean isVerbose = Boolean.parseBoolean((project.findProperty("verbose") ?: false).toString()) ||
