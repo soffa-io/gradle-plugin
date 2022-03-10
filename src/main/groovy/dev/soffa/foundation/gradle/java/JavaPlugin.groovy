@@ -17,7 +17,9 @@ class JavaPlugin {
         }
         project.setProperty("sourceCompatibility",  JavaLanguageVersion.of(version).toString())
         // project.setProperty("targetCompatibility", JavaVersion.VERSION_11)
-        if (project.findProperty("soffa.pmd.disabled") != true) {
+
+        boolean disablePmd = project.findProperty("pmd.disabled") == true
+        if (!disablePmd) {
             new PmdPlugin().apply(project)
         }
 
