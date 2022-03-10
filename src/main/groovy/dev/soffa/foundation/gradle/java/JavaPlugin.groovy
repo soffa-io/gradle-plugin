@@ -32,6 +32,8 @@ class JavaPlugin {
 
         project.javadoc {
             options.addStringOption("Xdoclint:none", "-quiet")
+            source = project.sourceSets.main.allJava
+            //classpath = project.configurations.compileClasspath
         }
 
         boolean isVerbose = Boolean.parseBoolean((project.findProperty("verbose") ?: false).toString()) ||

@@ -3,6 +3,9 @@ package dev.soffa.foundation.gradle.maven
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.external.javadoc.JavadocMemberLevel
 
 class MavenPublishPlugin implements Plugin<Project> {
 
@@ -19,6 +22,10 @@ class MavenPublishPlugin implements Plugin<Project> {
 
         String projectVersion = project.version
 
+        project.javadoc {
+            source = project.sourceSets.main.allJava
+        }
+
         if (project.hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
             projectVersion += "-SNAPSHOT"
         } else if (project.hasProperty("release") && projectVersion.endsWith("-SNAPSHOT")) {
@@ -32,8 +39,8 @@ class MavenPublishPlugin implements Plugin<Project> {
         }
 
         project.java {
-            //withJavadocJar()
-            withSourcesJar()
+            // withJavadocJar()
+            // withSourcesJar()
         }
     }
 
@@ -134,10 +141,14 @@ class MavenPublishPlugin implements Plugin<Project> {
 
     private void configureSonatypePublishing(Project project, String projectVersion) {
         project.plugins.apply('signing')
+
+
+
         project.publishing {
             publications {
                 maven(MavenPublication) {
                     from project.components.java
+
                     groupId = project.property("group")
                     artifactId = project.name
                     version = projectVersion
