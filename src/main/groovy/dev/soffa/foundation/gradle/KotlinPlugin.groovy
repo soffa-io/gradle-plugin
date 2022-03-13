@@ -23,6 +23,19 @@ class KotlinPlugin implements Plugin<Project> {
             annotation("javax.persistence.Entity")
             annotation("javax.inject.Named")
         }
+
+        project.compileKotlin {
+            kotlinOptions {
+                jvmTarget = "1.8"
+                freeCompilerArgs = ['-Xjvm-default=all']
+            }
+        }
+        project.compileTestKotlin {
+            kotlinOptions {
+                jvmTarget = "1.8"
+                freeCompilerArgs = ['-Xjvm-default=all']
+            }
+        }
     }
 
 

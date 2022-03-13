@@ -32,9 +32,8 @@ class JavaPlugin {
         }
 
         project.javadoc {
-            exclude "com/intuit/karate/**", "io/netty/**"
             options.addStringOption("Xdoclint:none", "-quiet")
-            source project.sourceSets.main.allJava
+            // source project.sourceSets.main.allJava
             failOnError = false
             // classpath = project.sourceSets.main.runtimeClasspath
         }
