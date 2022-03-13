@@ -11,7 +11,7 @@ class FoundationApi implements Plugin<Project> {
         project.plugins.apply("foundation.test.junit5")
         project.dependencies {
             runtimeOnly("com.intuit.karate:karate-junit5:1.2.0.RC4")
-            api("dev.soffa.foundation:foundation-api:${project.property("f4j.version")}")
+            api("dev.soffa.foundation:foundation-api:${project.property("foundation.version")}")
         }
     }
 }

@@ -10,14 +10,15 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
         project.dependencies {
             implementation(platform(SpringBootPlugin.BOM_COORDINATES))
             implementation(platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.1'))
-            testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            /*testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude(group: "com.vaadin.external.google")
-            }
+            }*/
         }
 
-        project.test {
+        project.plugins.apply("foundation.test.junit5")
+        /*project.test {
             useJUnitPlatform()
-        }
+        }*/
 
         if (project.plugins.hasPlugin("kotlin")) {
             project.plugins.apply("kotlin-spring")

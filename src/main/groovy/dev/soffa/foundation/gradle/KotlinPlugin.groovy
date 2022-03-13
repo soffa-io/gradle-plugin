@@ -9,7 +9,7 @@ class KotlinPlugin implements Plugin<Project> {
     public static final String kotlinVersion = "1.6.10"
     
     void apply(Project project) {
-        JavaPlugin.apply(project, 8, false)
+        JavaPlugin.apply(project, 8, true)
         project.dependencies {
             implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
