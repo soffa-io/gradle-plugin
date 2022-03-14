@@ -32,7 +32,9 @@ class FoundationService implements Plugin<Project> {
             implementation("dev.soffa.foundation:foundation-starter:${project.property("foundation.version")}")
             testImplementation("dev.soffa.foundation:foundation-starter-test:${project.property("foundation.version")}")
             for (String module: modules) {
-                implementation("dev.soffa.foundation:foundation-starter-${module}:${project.property("foundation.version")}")
+                if (!module.isEmpty()) {
+                    implementation("dev.soffa.foundation:foundation-starter-${module}:${project.property("foundation.version")}")
+                }
             }
         }
 
