@@ -13,11 +13,15 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude(group: "com.vaadin.external.google")
             }
+            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.6.4"
         }
 
         project.test {
             useJUnitPlatform()
         }
+
+        project.compileJava.inputs.files(project.processResources)
+
 
         if (project.plugins.hasPlugin("kotlin")) {
             project.plugins.apply("kotlin-spring")

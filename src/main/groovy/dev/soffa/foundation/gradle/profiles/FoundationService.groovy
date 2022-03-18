@@ -2,7 +2,6 @@ package dev.soffa.foundation.gradle.profiles
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionAware
 
 class FoundationService implements Plugin<Project> {
 

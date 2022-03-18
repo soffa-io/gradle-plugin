@@ -7,9 +7,9 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
 
     void apply(Project project) {
 
-        String prvMvnUrl = project.findProperty("prvMavenUrl") ?: System.getenv("PRV_MAVEN_URL")
-        String prvMvnUser = project.findProperty("prvMavenUser") ?: System.getenv("PRV_MAVEN_USER")
-        String prvMvnPwd = project.findProperty("prvMavenPassord") ?: System.getenv("PRV_MAVEN_PASSWORD")
+        String prvMvnUrl = project.findProperty("privateMavenUrl") ?: System.getenv("PRIVATE_MAVEN_URL") ?: project.findProperty("mavenUrl") ?: System.getenv("MAVEN_URL")
+        String prvMvnUser = project.findProperty("privateMavenUser") ?: System.getenv("PRIVATE_MAVEN_USER") ?: project.findProperty("mavenUser") ?: System.getenv("MAVEN_USER")
+        String prvMvnPwd = project.findProperty("privateMavenPassord") ?: System.getenv("PRIVATE_MAVEN_PASSWORD") ?: project.findProperty("mavenPassord") ?: System.getenv("MAVEN_PASSWORD")
 
         project.repositories {
             mavenLocal()
@@ -21,9 +21,11 @@ class DefaultRepositoriesPlugin implements Plugin<Project> {
                 prvMvnUrl.split(",").each {repoUrl ->
                     maven {
                         url = repoUrl
-                        credentials {
-                            username = prvMvnUser
-                            password = prvMvnPwd
+                        if (prvMvnUser!=null && !prvMvnUser.isEmpty()) {
+                            credentials {
+                                username = prvMvnUser
+                                password = prvMvnPwd
+                            }
                         }
                     }
                 }

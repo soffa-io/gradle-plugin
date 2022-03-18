@@ -3,7 +3,6 @@ package dev.soffa.foundation.gradle.java
 import dev.soffa.foundation.gradle.LombokPlugin
 import dev.soffa.foundation.gradle.qa.PmdPlugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.jvm.toolchain.JavaLanguageVersion
