@@ -13,7 +13,7 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude(group: "com.vaadin.external.google")
             }
-            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.6.4"
+            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.6.6"
         }
 
         project.test {
