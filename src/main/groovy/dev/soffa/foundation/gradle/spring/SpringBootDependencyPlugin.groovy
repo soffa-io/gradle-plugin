@@ -9,11 +9,11 @@ class SpringBootDependencyPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.dependencies {
             implementation(platform(SpringBootPlugin.BOM_COORDINATES))
-            implementation(platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.1'))
+            implementation(platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.3'))
             testImplementation("org.springframework.boot:spring-boot-starter-test") {
                 exclude(group: "com.vaadin.external.google")
             }
-            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.6.6"
+            annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.7.0"
         }
 
         project.test {
