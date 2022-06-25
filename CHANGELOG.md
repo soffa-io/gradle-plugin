@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 Le format utilisé se base sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et le versioning du projet respect les règles  [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.15] - 2022-06-25
+
+### Changed
+- Kotlin updated to 1.7.1
+
 ## [1.0.14] - 2022-06-17
 ### Changed
 - Kotlin updated to 1.7.0
