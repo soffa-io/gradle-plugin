@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 Le format utilisé se base sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 et le versioning du projet respect les règles  [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.16] - 2022-10-20
+
+### Changed
+- Kotlin updated to 1.7.20
+- spring-boot-gradle-plugin updated to 2.7.4
+
 ## [1.0.15] - 2022-06-25
 
 ### Changed

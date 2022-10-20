@@ -6,7 +6,7 @@ import org.gradle.api.Project
 
 class KotlinPlugin implements Plugin<Project> {
 
-    public static final String kotlinVersion = "1.7.0"
+    public static final String kotlinVersion = "1.7.20"
     
     void apply(Project project) {
         JavaPlugin.apply(project, 8, true)
