@@ -15,10 +15,9 @@ repositories {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 }
-
 var projectVersion = version.toString()
 
 if (hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
@@ -38,7 +37,7 @@ dependencies {
     implementation("io.github.gradle-nexus:publish-plugin:1.1.0")
     implementation("org.jacoco:org.jacoco.report:0.8.8")
     implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
-    implementation('org.springframework.boot:spring-boot-gradle-plugin:2.7.4')
+    implementation('org.springframework.boot:spring-boot-gradle-plugin:2.7.5')
     implementation('org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20')
     implementation('org.jetbrains.kotlin:kotlin-allopen:1.7.20')
     implementation("com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin:3.2.1")

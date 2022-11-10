@@ -1,6 +1,6 @@
 ## foundation-gradle-plugin
 
-![Release](https://img.shields.io/badge/release-v1.0.15-green.svg?style=flat)
+![Release](https://img.shields.io/badge/release-v1.0.17-green.svg?style=flat)
 
 ## How to use
 
