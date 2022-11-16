@@ -26,8 +26,10 @@ class JavaPlugin {
         project.compileJava {
             options.encoding = 'UTF-8'
             options.compilerArgs << '-parameters'
-            options.warnings = false
-            options.deprecation = false
+            options.compilerArgs << '-Xlint:deprecation'
+            options.compilerArgs << '-Xlint:unchecked'
+            options.warnings = true
+            options.deprecation = true
         }
 
         project.javadoc {
