@@ -16,8 +16,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
           java-version: '8'
           distribution: 'adopt'
@@ -31,7 +31,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Publish artifact to public Sonatype Nexus
         run: |
           echo $SONATYPE_GPG | base64 -d > $HOME/.sonatype-keys.gpg

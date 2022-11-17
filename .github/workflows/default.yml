@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     container: gradle:latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Check branch
         run: gradle check
 
