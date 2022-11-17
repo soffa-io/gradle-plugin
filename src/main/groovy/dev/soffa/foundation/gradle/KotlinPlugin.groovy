@@ -13,6 +13,7 @@ class KotlinPlugin implements Plugin<Project> {
         project.dependencies {
             implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
             implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+            implementation("org.jetbrains.kotlinx: -core:1.6.4")
             testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 
         }
