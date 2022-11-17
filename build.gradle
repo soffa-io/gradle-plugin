@@ -19,6 +19,8 @@ java {
         vendor = JvmVendorSpec.ADOPTIUM
     }
 }
+
+
 var projectVersion = version.toString()
 
 if (hasProperty("snapshot") && !projectVersion.endsWith("-SNAPSHOT")) {
