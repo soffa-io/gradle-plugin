@@ -36,12 +36,12 @@ java {
 dependencies {
     compileOnly(gradleApi())
     implementation("io.github.gradle-nexus:publish-plugin:1.1.0")
-    implementation("org.jacoco:org.jacoco.report:0.8.7")
+    implementation("org.jacoco:org.jacoco.report:0.8.12")
     implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
-    implementation('org.springframework.boot:spring-boot-gradle-plugin:2.6.3')
-    implementation("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-    implementation("org.jetbrains.kotlin:kotlin-allopen:1.6.10")
+    implementation('org.springframework.boot:spring-boot-gradle-plugin:3.2.4')
+    implementation("io.spring.gradle:dependency-management-plugin:1.1.4")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
+    implementation("org.jetbrains.kotlin:kotlin-allopen:1.9.23")
 
 
 }
@@ -63,7 +63,7 @@ if (hasProperty("ossrhUsername")) {
                 pom {
                     name.set("SOFFA Gradle Plugin")
                     description.set("Gradle plugins.")
-                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    url.set("https://github.com/soffa-projects/foundation-gradle-plugin")
                     version = projectVersion
                     licenses {
                         license {
@@ -79,9 +79,9 @@ if (hasProperty("ossrhUsername")) {
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
-                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        connection.set("scm:git:git://soffa-projects/foundation-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffa-projects/foundation-gradle-plugin.git")
+                        url.set("https://github.com/soffa-projects/foundation-gradle-plugin")
                     }
                 }
             }
@@ -111,7 +111,7 @@ if (hasProperty("ossrhUsername")) {
                 pom {
                     name.set("SOFFA Gradle Plugin")
                     description.set("A gradle plugin with useful plugins.")
-                    url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                    url.set("https://github.com/soffa-projects/foundation-gradle-plugin")
                     version = projectVersion
                     licenses {
                         license {
@@ -127,9 +127,9 @@ if (hasProperty("ossrhUsername")) {
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://soffa-io/soffa-gradle-plugin.git")
-                        developerConnection.set("scm:git:ssh://soffa-io/soffa-gradle-plugin.git")
-                        url.set("https://github.com/soffa-io/soffa-gradle-plugin")
+                        connection.set("scm:git:git://soffa-projects/foundation-gradle-plugin.git")
+                        developerConnection.set("scm:git:ssh://soffa-projects/foundation-gradle-plugin.git")
+                        url.set("https://github.com/soffa-projects/foundation-gradle-plugin")
                     }
                 }
             }

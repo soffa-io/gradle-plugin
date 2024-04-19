@@ -11,10 +11,10 @@ class LombokPlugin implements Plugin<Project> {
 
     static void applyPlugin(Project project) {
         project.dependencies {
-            compileOnly 'org.projectlombok:lombok:1.18.20'
-            annotationProcessor 'org.projectlombok:lombok:1.18.20'
-            testCompileOnly 'org.projectlombok:lombok:1.18.20'
-            testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+            compileOnly 'org.projectlombok:lombok:1.18.32'
+            annotationProcessor 'org.projectlombok:lombok:1.18.32'
+            testCompileOnly 'org.projectlombok:lombok:1.18.32'
+            testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
         }
     }
 

@@ -8,7 +8,7 @@ class SpringBootDataPlugin extends SpringBootDependencyPlugin {
         Object.apply(project)
         project.dependencies {
             implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-            testImplementation("com.h2database:h2:1.4.200")
+            testImplementation("com.h2database:h2:2.2.224")
         }
 
     }
