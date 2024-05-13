@@ -21,7 +21,7 @@ class KotlinPlugin implements Plugin<Project> {
 
         project.allOpen {
             annotation("javax.persistence.Entity")
-            annotation("javax.inject.Named")
+            annotation("jakarta.inject.Named")
         }
     }
 

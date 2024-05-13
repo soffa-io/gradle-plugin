@@ -92,10 +92,9 @@ class JacocoSupport {
         project.plugins.apply("jacoco")
         project.jacocoTestReport {
             reports {
-                xml.enabled true
-                xml.destination project.file("${project.buildDir}/coverage.xml")
-                html.enabled true
-                html.destination project.file("${project.buildDir}/jacocoHtml")
+                csv.required = false
+                xml.outputLocation = project.file(project.layout.buildDirectory.dir("coverage.xml"))
+                html.outputLocation = project.file(project.layout.buildDirectory.dir("jacocoHtml"))
             }
         }
 
@@ -113,7 +112,7 @@ class JacocoSupport {
         }
 
         project.jacoco {
-            toolVersion = "0.8.7"
+            toolVersion = "0.8.12"
         }
 
         /*project.test {
