@@ -18,6 +18,11 @@ class PmdPlugin implements Plugin<Project> {
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
+    <description>
+       Default SOFFA rules
+       
+    </description>
+    
     <rule ref="category/java/bestpractices.xml">
         <exclude name="JUnitTestContainsTooManyAsserts"/>
         <exclude name="ConstantsInInterface"/>
@@ -37,7 +42,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="PrematureDeclaration"/>
         <exclude name="ShortVariable"/>
         <exclude name="LongVariable"/>
-        <exclude name="DefaultPackage"/>
+        <!-- <exclude name="DefaultPackage"/> -->
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>
         <exclude name="LinguisticNaming"/>
@@ -84,8 +89,8 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="CommentSize"/>
     </rule>
     <rule ref="category/java/errorprone.xml">
-        <exclude name="DataflowAnomalyAnalysis"/>
-        <exclude name="BeanMembersShouldSerialize"/>
+        <!-- <exclude name="DataflowAnomalyAnalysis"/> -->
+        <!-- <exclude name="BeanMembersShouldSerialize"/> -->
         <exclude name="AssignmentInOperand"/>
         <exclude name="UseLocaleWithCaseConversions"/>
         <exclude name="AvoidInstanceofChecksInCatchClause"/>
@@ -114,7 +119,7 @@ class PmdPlugin implements Plugin<Project> {
         project.plugins.apply("pmd")
         project.pmd {
             consoleOutput = true
-            toolVersion = "6.31.0"
+            toolVersion = "7.1.0"
             rulesMinimumPriority = 5
             //ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
             ruleSetConfig = project.resources.text.fromFile("$configDir/qa/pmd.xml")
