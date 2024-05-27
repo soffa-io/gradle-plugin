@@ -29,6 +29,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="JUnitAssertionsShouldIncludeMessage" />
         <exclude name="JUnitTestsShouldIncludeAssert" />
         <exclude name="AvoidUsingHardCodedIP" />
+        <exclude name="GuardLogStatement" />
 
     </rule>
     <rule ref="category/java/codestyle.xml">
@@ -47,6 +48,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="ShortMethodName"/>
         <exclude name="LinguisticNaming"/>
         <exclude name="UnnecessaryFullyQualifiedName"/>
+        <exclude name="UseExplicitTypes"/>
     </rule>
     
     <rule ref="category/java/codestyle.xml/ClassNamingConventions">
@@ -73,6 +75,7 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="TooManyFields"/>
         <exclude name="TooManyMethods"/>
         <exclude name="CouplingBetweenObjects"/>
+        <exclude name="CognitiveComplexity"/>
     </rule>
     
     <rule ref="category/java/design.xml/CyclomaticComplexity">
@@ -94,6 +97,8 @@ class PmdPlugin implements Plugin<Project> {
         <exclude name="AssignmentInOperand"/>
         <exclude name="UseLocaleWithCaseConversions"/>
         <exclude name="AvoidInstanceofChecksInCatchClause"/>
+        <exclude name="ReturnEmptyCollectionRatherThanNull"/>
+        <exclude name="AvoidLiteralsInIfCondition"/>
     </rule>
     <rule ref="category/java/multithreading.xml">
         <exclude name="DoNotUseThreads" />
